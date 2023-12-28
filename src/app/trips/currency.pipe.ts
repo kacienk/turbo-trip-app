@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Currency } from "../interfaces/trip";
+import { Currency } from "../models/trip.model";
 
 @Pipe({ standalone: true, name: 'currencyPipe' })
 export class CurrencyPipe implements PipeTransform {

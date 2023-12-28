@@ -1,32 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Trip, Currency } from '../interfaces/trip';
-import _trips from '../../assets/trips.json';
+import { Trip, Currency } from '../models/trip.model';
 import { CurrencyPipe } from './currency.pipe';
+import { TripService } from './trips.service';
+import { TripFormComponent } from '../trip-form/trip-form.component';
 
 @Component({
   selector: 'app-trips',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe],
+  imports: [CommonModule, CurrencyPipe, TripFormComponent],
   templateUrl: './trips.component.html',
   styleUrl: './trips.component.css',
 })
-export class TripsComponent {
-  trips: Trip[];
-  maxPrice: number;
-  minPrice: number;
-
-  parseTrips = (data: any[]): Trip[] => {
-    return data.map((trip) => ({
-      ...trip,
-      startDate: new Date(trip.startDate),
-      endDate: new Date(trip.endDate),
-      price: Number(trip.price),
-      maxSpots: Number(trip.maxSpots),
-      takenSpots: Number(trip.takenSpots),
-      currency: Currency.USD,
-    }));
-  };
+export class TripsComponent implements OnInit{
+  trips: Trip[] = [];
 
   addReservation = (index: number): void => {
     this.trips[index].takenSpots++;
@@ -45,18 +32,33 @@ export class TripsComponent {
   }
 
   removeTrip = (index: number): void => {
-    this.trips.splice(index, 1)
+    this.tripService.removeTrip(index)
   }
 
-  constructor() {
-    this.trips = this.parseTrips(_trips);
-    this.maxPrice = this.trips.reduce(
+  maxPrice = (): number => {
+    const maxPrice = this.trips.reduce(
       (max, current) => (current.price > max.price ? current : max),
       this.trips[0]
     ).price;
-    this.minPrice = this.trips.reduce(
+    
+    return maxPrice;
+  }
+
+  minPrice = (): number => {
+    const minPrice = this.trips.reduce(
       (min, current) => (current.price > min.price ? min : current),
       this.trips[0]
     ).price;
+    
+    return minPrice;
   }
+
+  constructor(private tripService: TripService) { }
+
+  ngOnInit() {
+    this.tripService.trips$.subscribe((trips) => {
+      this.trips = trips;
+    });
+  }
+
 }
