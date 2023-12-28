@@ -1,0 +1,34 @@
+<form [formGroup]="filterForm">
+  <div>
+    <label for="location">Location:</label>
+    <input type="text" id="location" formControlName="location" />
+  </div>
+
+  <div>
+    <label for="priceMin">Min Price:</label>
+    <input type="number" id="priceMin" formControlName="priceMin" />
+  </div>
+
+  <div>
+    <label for="priceMax">Max Price:</label>
+    <input type="number" id="priceMax" formControlName="priceMax" />
+  </div>
+
+  <div>
+    <label for="startDateMin">Min Start Date:</label>
+    <input type="date" id="startDateMin" formControlName="startDateMin" />
+  </div>
+
+  <div>
+    <label for="startDateMax">Max Start Date:</label>
+    <input type="date" id="startDateMax" formControlName="startDateMax" />
+  </div>
+
+  <div>
+    <label for="rating">Rating:</label>
+    <input type="number" id="rating" formControlName="rating" />
+  </div>
+
+  <button type="button" (click)="applyFilter()">Apply Filter</button>
+  <button type="button" (click)="clearFilter()">Clear Filter</button>
+</form>

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Currency, ITrip, Trip } from '../models/trip.model';
-import { TripService } from '../trips/trips.service';
+import { TripService } from '../services/trips.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,13 +14,16 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './trip-form.component.html',
-  styleUrl: './trip-form.component.css'
+  styleUrl: './trip-form.component.css',
 })
 export class TripFormComponent {
   tripForm: FormGroup;
   currencies = Object.values(Currency); // Extracting enum values for select options
 
-  constructor(private formBuilder: FormBuilder, private tripService: TripService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private tripService: TripService
+  ) {
     this.tripForm = this.formBuilder.group({
       name: ['', Validators.required],
       destinationCountry: ['', Validators.required],
@@ -33,11 +41,10 @@ export class TripFormComponent {
     if (this.tripForm.valid) {
       const tripData: ITrip = this.tripForm.value as ITrip;
       const newTrip: Trip = new Trip(tripData);
-      console.log(newTrip)
+      console.log(newTrip);
       this.tripService.addTrip(newTrip);
       console.log('Added new trip:', newTrip);
       this.tripForm.reset();
     }
   }
 }
-

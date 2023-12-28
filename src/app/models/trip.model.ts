@@ -16,12 +16,10 @@ export interface ITrip {
   imageRef: string;
 }
 
-export class Trip implements ITrip{
-  constructor(
-    data: ITrip
-  ) {
+export class Trip implements ITrip {
+  constructor(data: ITrip) {
     this.name = data.name;
-    this.destinationCountry = data.description;
+    this.destinationCountry = data.destinationCountry;
     this.startDate = new Date(data.startDate);
     this.endDate = new Date(data.endDate);
     this.price = data.price;
@@ -30,6 +28,7 @@ export class Trip implements ITrip{
     this.description = data.description;
     this.imageRef = data.imageRef;
     this.currency = Currency.USD;
+    this.rating = 0;
   }
 
   name: string;
@@ -42,4 +41,5 @@ export class Trip implements ITrip{
   description: string;
   imageRef: string;
   currency: Currency;
+  rating: number;
 }

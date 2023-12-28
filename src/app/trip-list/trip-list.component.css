@@ -1,0 +1,25 @@
+.card {
+  margin-bottom: 10px;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.card-columns {
+  column-count: 4;
+}
+
+.reservation-button {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+
+  align-self: center;
+  justify-self: flex-end;
+  cursor: pointer;
+}
+
+.reservation-button:hover {
+  color: rgb(173, 173, 173);
+}
