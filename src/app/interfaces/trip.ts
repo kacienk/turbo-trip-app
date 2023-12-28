@@ -1,3 +1,9 @@
+export enum Currency {
+  USD = "dolar",
+  PLN = "zloty",
+  EUR = "euro",
+}
+
 export interface Trip {
   name: string,
   destinationCountry: string,
@@ -8,4 +14,5 @@ export interface Trip {
   takenSpots: number,
   description: string,
   imageRef: string
+  currency: Currency
 }

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Trip } from '../interfaces/trip';
+import { Trip, Currency } from '../interfaces/trip';
 import _trips from '../../assets/trips.json';
+import { CurrencyPipe } from './currency.pipe';
 
 @Component({
   selector: 'app-trips',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyPipe],
   templateUrl: './trips.component.html',
   styleUrl: './trips.component.css',
 })
@@ -23,6 +24,7 @@ export class TripsComponent {
       price: Number(trip.price),
       maxSpots: Number(trip.maxSpots),
       takenSpots: Number(trip.takenSpots),
+      currency: Currency.USD,
     }));
   };
 
@@ -33,6 +35,18 @@ export class TripsComponent {
   removeReservation = (index: number): void => {
     this.trips[index].takenSpots--;
   };
+
+  changeCurrency = (index: number, currency: string): void => {
+    this.trips[index].currency = currency as Currency
+  }
+
+  currentlyReserved = (): number => {
+    return this.trips.reduce((sum, current) => sum + current.takenSpots, 0)
+  }
+
+  removeTrip = (index: number): void => {
+    this.trips.splice(index, 1)
+  }
 
   constructor() {
     this.trips = this.parseTrips(_trips);
