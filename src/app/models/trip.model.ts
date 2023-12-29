@@ -1,3 +1,5 @@
+import { BehaviorSubject, Observable } from 'rxjs';
+
 export enum Currency {
   USD = 'dolar',
   PLN = 'zloty',

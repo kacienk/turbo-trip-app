@@ -1,1 +1,125 @@
-<p>trip-cart works!</p>
+<div *ngIf="tripsInCart.length; else cartEmpty">
+  <div *ngFor="let trip of tripsInCart">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ trip.name | uppercase }}</h5>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="checkboxNoLabel"
+          [checked]="isTripSelected(trip)"
+          (change)="tripSelectionChange(trip)"
+        />
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Destination: {{ trip.destinationCountry | uppercase }}
+        </li>
+        <li class="list-group-item">
+          Duration:
+          {{ trip.startDate.getDay() }}.{{ trip.startDate.getMonth() }}.{{
+            trip.startDate.getFullYear()
+          }}
+          - {{ trip.endDate.getDay() }}.{{ trip.endDate.getMonth() }}.{{
+            trip.endDate.getFullYear()
+          }}
+        </li>
+        <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
+        <li class="list-group-item">
+          <div *ngIf="trip.currency === 'dolar'">
+            Price: ${{ trip.price | currencyPipe : "dolar" }}
+          </div>
+          <div *ngIf="trip.currency === 'zloty'">
+            Price: {{ trip.price | currencyPipe : "zloty" }} zł
+          </div>
+          <div *ngIf="trip.currency === 'euro'">
+            Price: {{ trip.price | currencyPipe : "euro" }}€
+          </div>
+          <div class="btn-group" role="group" aria-label="Currency selection">
+            <button
+              type="button"
+              class="btn btn-primary"
+              [ngClass]="{ active: trip.currency === 'dolar' }"
+              (click)="changeCurrency(trip, 'dolar')"
+            >
+              USD
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              [ngClass]="{ active: trip.currency === 'zloty' }"
+              (click)="changeCurrency(trip, 'zloty')"
+            >
+              PLN
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              [ngClass]="{ active: trip.currency === 'euro' }"
+              (click)="changeCurrency(trip, 'euro')"
+            >
+              EUR
+            </button>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div>
+            <div
+              *ngIf="
+                trip.maxSpots - (trip.reservedSpots + trip.takenSpots) > 0;
+                else noSpots
+              "
+              [ngStyle]="
+                trip.maxSpots - (trip.reservedSpots + trip.takenSpots) > 4
+                  ? { color: 'black' }
+                  : { color: 'blue' }
+              "
+            >
+              There are
+              {{ trip.maxSpots - (trip.reservedSpots + trip.takenSpots) }} spots
+              left.
+            </div>
+            <ng-template #noSpots
+              ><div style="color: red">
+                There are no spots available!
+              </div></ng-template
+            >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              class="bi bi-plus reservation-button"
+              viewBox="0 0 16 16"
+              (click)="addReservation(trip)"
+              *ngIf="trip.maxSpots - (trip.reservedSpots + trip.takenSpots) > 0"
+            >
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              class="bi bi-dash reservation-button"
+              viewBox="0 0 16 16"
+              (click)="removeReservation(trip)"
+              *ngIf="trip.reservedSpots > 0"
+            >
+              <path
+                d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"
+              />
+            </svg>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="buy()" style="margin: 10px">
+    Buy
+  </button>
+  <p class="cart-cost">${{ selectedTripsValue() }}</p>
+</div>
+<ng-template #cartEmpty><p>Cart is empty!</p></ng-template>

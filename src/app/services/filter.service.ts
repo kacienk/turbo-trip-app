@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import { Trip } from '../models/trip.model';
-import { TripService } from './trips.service';
+import { TripsService } from './trips.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class FilterService {
   filters$ = this.filterSubject.asObservable();
   filteredTrips$!: Observable<Trip[]>;
 
-  constructor(private tripService: TripService) {
+  constructor(private tripService: TripsService) {
     this.filteredTrips$ = combineLatest([
       this.tripService.trips$,
       this.filters$,

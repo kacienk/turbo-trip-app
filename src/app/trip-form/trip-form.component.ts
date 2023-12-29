@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Currency, ITrip, Trip } from '../models/trip.model';
-import { TripService } from '../services/trips.service';
+import { TripsService } from '../services/trips.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -22,7 +22,7 @@ export class TripFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private tripService: TripService
+    private tripService: TripsService
   ) {
     this.tripForm = this.formBuilder.group({
       name: ['', Validators.required],

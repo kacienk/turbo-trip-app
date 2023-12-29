@@ -4,7 +4,7 @@ import { FilterService } from '../services/filter.service';
 import { CommonModule } from '@angular/common';
 import { TripFormComponent } from '../trip-form/trip-form.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { TripService } from '../services/trips.service';
+import { TripsService } from '../services/trips.service';
 import { CurrencyPipe } from '../trips/currency.pipe';
 import { TripFilterComponent } from '../trip-filter/trip-filter.component';
 import { Observable } from 'rxjs';
@@ -26,12 +26,12 @@ export class TripListComponent implements OnInit {
   trips: Trip[] = [];
   filteredTrips$: Observable<Trip[]> = this.filterService.filteredTrips$;
 
-  addReservation = (index: number): void => {
-    this.trips[index].reservedSpots++;
+  addReservation = (trip: Trip): void => {
+    this.tripService.addReservation(trip);
   };
 
-  removeReservation = (index: number): void => {
-    this.trips[index].reservedSpots--;
+  removeReservation = (trip: Trip): void => {
+    this.tripService.removeReservation(trip);
   };
 
   changeCurrency = (index: number, currency: string): void => {
@@ -62,7 +62,7 @@ export class TripListComponent implements OnInit {
 
   constructor(
     private filterService: FilterService,
-    private tripService: TripService
+    private tripService: TripsService
   ) {}
 
   ngOnInit() {

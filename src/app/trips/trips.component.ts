@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Trip, Currency } from '../models/trip.model';
 import { CurrencyPipe } from './currency.pipe';
-import { TripService } from '../services/trips.service';
+import { TripsService } from '../services/trips.service';
 import { TripFormComponent } from '../trip-form/trip-form.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { TripListComponent } from '../trip-list/trip-list.component';
@@ -23,7 +23,7 @@ import { TripListComponent } from '../trip-list/trip-list.component';
 export class TripsComponent implements OnInit {
   trips: Trip[] = [];
 
-  constructor(private tripService: TripService) {}
+  constructor(private tripService: TripsService) {}
 
   currentlyReserved = (): number => {
     return this.trips.reduce((sum, current) => sum + current.reservedSpots, 0);

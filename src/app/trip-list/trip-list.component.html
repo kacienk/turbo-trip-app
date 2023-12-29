@@ -121,7 +121,7 @@
             fill="currentColor"
             class="bi bi-plus reservation-button"
             viewBox="0 0 16 16"
-            (click)="addReservation(i)"
+            (click)="addReservation(trip)"
             *ngIf="trip.maxSpots - (trip.reservedSpots + trip.takenSpots) > 0"
           >
             <path
@@ -135,7 +135,7 @@
             fill="currentColor"
             class="bi bi-dash reservation-button"
             viewBox="0 0 16 16"
-            (click)="removeReservation(i)"
+            (click)="removeReservation(trip)"
             *ngIf="trip.reservedSpots > 0"
           >
             <path
