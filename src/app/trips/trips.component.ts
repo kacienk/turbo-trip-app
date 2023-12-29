@@ -26,7 +26,7 @@ export class TripsComponent implements OnInit {
   constructor(private tripService: TripService) {}
 
   currentlyReserved = (): number => {
-    return this.trips.reduce((sum, current) => sum + current.takenSpots, 0);
+    return this.trips.reduce((sum, current) => sum + current.reservedSpots, 0);
   };
 
   ngOnInit() {

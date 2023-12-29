@@ -29,6 +29,7 @@ export class Trip implements ITrip {
     this.imageRef = data.imageRef;
     this.currency = Currency.USD;
     this.rating = 0;
+    this.reservedSpots = 0;
   }
 
   name: string;
@@ -42,4 +43,5 @@ export class Trip implements ITrip {
   imageRef: string;
   currency: Currency;
   rating: number;
+  reservedSpots: number;
 }

@@ -95,14 +95,19 @@
       <li class="list-group-item">
         <div>
           <div
-            *ngIf="trip.maxSpots - trip.takenSpots > 0; else noSpots"
+            *ngIf="
+              trip.maxSpots - (trip.reservedSpots + trip.takenSpots) > 0;
+              else noSpots
+            "
             [ngStyle]="
-              trip.maxSpots - trip.takenSpots > 4
+              trip.maxSpots - (trip.reservedSpots + trip.takenSpots) > 4
                 ? { color: 'black' }
                 : { color: 'blue' }
             "
           >
-            There are {{ trip.maxSpots - trip.takenSpots }} spots left.
+            There are
+            {{ trip.maxSpots - (trip.reservedSpots + trip.takenSpots) }} spots
+            left.
           </div>
           <ng-template #noSpots
             ><div style="color: red">
@@ -117,7 +122,7 @@
             class="bi bi-plus reservation-button"
             viewBox="0 0 16 16"
             (click)="addReservation(i)"
-            *ngIf="trip.maxSpots - trip.takenSpots > 0"
+            *ngIf="trip.maxSpots - (trip.reservedSpots + trip.takenSpots) > 0"
           >
             <path
               d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
@@ -131,7 +136,7 @@
             class="bi bi-dash reservation-button"
             viewBox="0 0 16 16"
             (click)="removeReservation(i)"
-            *ngIf="trip.takenSpots > 0"
+            *ngIf="trip.reservedSpots > 0"
           >
             <path
               d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"

@@ -1,13 +1,45 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav
+  class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between"
+>
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="router-link-active">Trips</a>
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="router-link-active"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/trips"
+            routerLinkActive="router-link-active"
+            >Trips</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/cart"
+            routerLinkActive="router-link-active"
+            >Cart</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/add-trip"
+            routerLinkActive="router-link-active"
+            >Add trip</a
+          >
         </li>
       </ul>
     </div>
   </div>
+  <app-reservation-sum class="navbar-text"></app-reservation-sum>
 </nav>
 
 <router-outlet></router-outlet>

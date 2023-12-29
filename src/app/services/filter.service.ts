@@ -24,22 +24,21 @@ export class FilterService {
 
   private filterTrips(trips: Trip[], filters: any): Trip[] {
     let filteredTrips = [...trips];
-    console.log(filteredTrips);
     if (filters.location) {
-      filteredTrips = filteredTrips.filter((trip) =>
-        trip.destinationCountry
+      filteredTrips = filteredTrips.filter((trip) => {
+        return trip.destinationCountry
           .toLowerCase()
-          .includes(filters.location.toLowerCase())
-      );
+          .includes(filters.location.toLowerCase());
+      });
     }
 
-    if (filters.priceMin !== undefined) {
+    if (filters.priceMin) {
       filteredTrips = filteredTrips.filter(
         (trip) => trip.price >= filters.priceMin
       );
     }
 
-    if (filters.priceMax !== undefined) {
+    if (filters.priceMax) {
       filteredTrips = filteredTrips.filter(
         (trip) => trip.price <= filters.priceMax
       );
@@ -57,13 +56,11 @@ export class FilterService {
       );
     }
 
-    if (filters.rating !== undefined) {
+    if (filters.rating) {
       filteredTrips = filteredTrips.filter(
         (trip) => trip.rating === filters.rating
       );
     }
-
-    console.log(filteredTrips);
     return filteredTrips;
   }
 

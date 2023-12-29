@@ -1,34 +1,80 @@
-<form [formGroup]="filterForm">
-  <div>
-    <label for="location">Location:</label>
-    <input type="text" id="location" formControlName="location" />
-  </div>
+<div class="container mt-5" style="margin-bottom: 20px">
+  <form [formGroup]="filterForm" class="filter-form form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="location">Location:</label>
+      <input
+        type="text"
+        id="location"
+        formControlName="location"
+        class="form-control mb-2"
+      />
+    </div>
 
-  <div>
-    <label for="priceMin">Min Price:</label>
-    <input type="number" id="priceMin" formControlName="priceMin" />
-  </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="priceMin">Min Price:</label>
+      <input
+        type="number"
+        id="priceMin"
+        formControlName="priceMin"
+        class="form-control mb-2"
+      />
+    </div>
 
-  <div>
-    <label for="priceMax">Max Price:</label>
-    <input type="number" id="priceMax" formControlName="priceMax" />
-  </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="priceMax">Max Price:</label>
+      <input
+        type="number"
+        id="priceMax"
+        formControlName="priceMax"
+        class="form-control mb-2"
+      />
+    </div>
 
-  <div>
-    <label for="startDateMin">Min Start Date:</label>
-    <input type="date" id="startDateMin" formControlName="startDateMin" />
-  </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="startDateMin">Min Start Date:</label>
+      <input
+        type="date"
+        id="startDateMin"
+        formControlName="startDateMin"
+        class="form-control mb-2"
+      />
+    </div>
 
-  <div>
-    <label for="startDateMax">Max Start Date:</label>
-    <input type="date" id="startDateMax" formControlName="startDateMax" />
-  </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="startDateMax">Max Start Date:</label>
+      <input
+        type="date"
+        id="startDateMax"
+        formControlName="startDateMax"
+        class="form-control mb-2"
+      />
+    </div>
 
-  <div>
-    <label for="rating">Rating:</label>
-    <input type="number" id="rating" formControlName="rating" />
-  </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="rating">Rating:</label>
+      <input
+        type="number"
+        id="rating"
+        formControlName="rating"
+        class="form-control mb-2"
+      />
+    </div>
 
-  <button type="button" (click)="applyFilter()">Apply Filter</button>
-  <button type="button" (click)="clearFilter()">Clear Filter</button>
-</form>
+    <button
+      type="button"
+      (click)="applyFilter()"
+      class="btn btn-primary mb-2"
+      style="margin: 10px"
+    >
+      Apply Filter
+    </button>
+    <button
+      type="button"
+      (click)="clearFilter()"
+      class="btn btn-secondary mb-2"
+      style="margin: 10px"
+    >
+      Clear Filter
+    </button>
+  </form>
+</div>

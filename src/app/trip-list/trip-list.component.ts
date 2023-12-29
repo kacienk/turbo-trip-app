@@ -27,11 +27,11 @@ export class TripListComponent implements OnInit {
   filteredTrips$: Observable<Trip[]> = this.filterService.filteredTrips$;
 
   addReservation = (index: number): void => {
-    this.trips[index].takenSpots++;
+    this.trips[index].reservedSpots++;
   };
 
   removeReservation = (index: number): void => {
-    this.trips[index].takenSpots--;
+    this.trips[index].reservedSpots--;
   };
 
   changeCurrency = (index: number, currency: string): void => {

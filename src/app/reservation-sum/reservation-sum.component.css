@@ -1,0 +1,10 @@
+.reservation-sum-box {
+  color: black;
+  min-width: 60px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1pt black solid;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  padding: 8px;
+}
