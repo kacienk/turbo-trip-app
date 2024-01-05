@@ -1,6 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">TurboTrips</a>
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" routerLink="/">TurboTrips</a>
+      <app-reservation-sum class="navbar-text"></app-reservation-sum>
+    </div>
     <button
       class="navbar-toggler"
       type="button"
@@ -49,10 +52,10 @@
             >Add trip</a
           >
         </li>
+        <li>
+          <app-currency-selector></app-currency-selector>
+        </li>
       </ul>
-    </div>
-    <div>
-      <app-reservation-sum class="navbar-text"></app-reservation-sum>
     </div>
   </div>
 </nav>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FilterService } from '../services/filter.service';
+import { FilterService } from '../../services/filter.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

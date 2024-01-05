@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { TripsComponent } from './trips/trips.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { TripFormComponent } from './trip-form/trip-form.component';
-import { TripCartComponent } from './trip-cart/trip-cart.component';
+import { TripsComponent } from './components/trips/trips.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { TripFormComponent } from './components/trip-form/trip-form.component';
+import { TripCartComponent } from './components/trip-cart/trip-cart.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },

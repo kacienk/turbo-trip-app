@@ -1,11 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export enum Currency {
-  USD = 'dolar',
-  PLN = 'zloty',
-  EUR = 'euro',
-}
-
 export interface ITrip {
   id: string;
   name: string;
@@ -31,7 +25,6 @@ export class Trip implements ITrip {
     this.takenSpots = data.takenSpots;
     this.description = data.description;
     this.imageRef = data.imageRef;
-    this.currency = Currency.USD;
     this.rating = 0;
     this.reservedSpots = 0;
   }
@@ -46,7 +39,6 @@ export class Trip implements ITrip {
   takenSpots: number;
   description: string;
   imageRef: string;
-  currency: Currency;
   rating: number;
   reservedSpots: number;
 }

@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Currency, ITrip, Trip } from '../models/trip.model';
-import { TripsService } from '../services/trips.service';
+import { ITrip, Trip } from '../../models/trip.model';
+import { TripsService } from '../../services/trips.service';
 import { CommonModule } from '@angular/common';
+import { CURRENCIES, CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-trip-form',
@@ -16,13 +17,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './trip-form.component.html',
   styleUrl: './trip-form.component.css',
 })
-export class TripFormComponent {
+export class TripFormComponent implements OnInit {
   tripForm: FormGroup;
-  currencies = Object.values(Currency); // Extracting enum values for select options
+  currency = 'USD';
 
   constructor(
     private formBuilder: FormBuilder,
-    private tripService: TripsService
+    private tripService: TripsService,
+    private currencyService: CurrencyService
   ) {
     this.tripForm = this.formBuilder.group({
       id: ['', Validators.pattern('[a-z0-9-]*')],
@@ -42,16 +44,23 @@ export class TripFormComponent {
       const regex = /[^a-z0-9-]/g;
       const tripData: ITrip = this.tripForm.value as ITrip;
       tripData.takenSpots = 0;
+      tripData.price /= CURRENCIES[this.currency as keyof typeof CURRENCIES];
+
       if (!tripData.id) {
         tripData.id = tripData.name
           .replace(' ', '-')
           .toLowerCase()
           .replace(regex, '');
       }
-      console.log(tripData);
+
       this.tripService.addTrip(tripData);
-      console.log('Added new trip:', tripData);
       this.tripForm.reset();
     }
+  }
+
+  ngOnInit(): void {
+    this.currencyService.currency$.subscribe((currency) => {
+      this.currency = currency;
+    });
   }
 }

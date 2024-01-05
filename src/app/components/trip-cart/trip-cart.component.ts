@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { CartService } from '../services/cart.service';
-import { Currency, Trip } from '../models/trip.model';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../services/cart.service';
+import { Trip } from '../../models/trip.model';
 import { CommonModule } from '@angular/common';
-import { CurrencyPipe } from '../trips/currency.pipe';
-import { ReservationsService } from '../services/reservations.service';
-import { Reservation } from '../models/reservation.model';
+import { CurrencyPipe } from '../../pipes/currency.pipe';
+import { ReservationsService } from '../../services/reservations.service';
+import { Reservation } from '../../models/reservation.model';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-trip-cart',
@@ -13,9 +14,10 @@ import { Reservation } from '../models/reservation.model';
   styleUrl: './trip-cart.component.css',
   imports: [CommonModule, CurrencyPipe],
 })
-export class TripCartComponent {
+export class TripCartComponent implements OnInit {
   tripsInCart: Trip[] = [];
   selectedTrips: Trip[] = [];
+  currency = 'USD';
 
   addReservation = (trip: Trip): void => {
     this.cartService.addReservation(trip);
@@ -28,10 +30,6 @@ export class TripCartComponent {
     }
 
     this.cartService.removeReservation(trip);
-  };
-
-  changeCurrency = (trip: Trip, currency: string): void => {
-    trip.currency = currency as Currency;
   };
 
   isTripSelected = (trip: Trip): boolean => {
@@ -73,7 +71,8 @@ export class TripCartComponent {
 
   constructor(
     private cartService: CartService,
-    private reservationsService: ReservationsService
+    private reservationsService: ReservationsService,
+    private currencyService: CurrencyService
   ) {}
 
   ngOnInit() {
@@ -81,5 +80,8 @@ export class TripCartComponent {
       this.tripsInCart = trips;
     });
     this.selectedTrips = this.selectedTrips.concat(this.tripsInCart);
+    this.currencyService.currency$.subscribe((currency) => {
+      this.currency = currency;
+    });
   }
 }

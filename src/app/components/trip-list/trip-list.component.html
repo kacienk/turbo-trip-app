@@ -1,4 +1,3 @@
-<app-trip-filter></app-trip-filter>
 <div *ngFor="let trip of filteredTrips$ | async; index as i">
   <div
     class="card"
@@ -11,7 +10,13 @@
           : null
     }"
   >
-    <img class="card-img-top" src="{{ trip.imageRef }}" alt="Card image cap" />
+    <div class=".circular-image">
+      <img
+        class="card-img-top"
+        src="{{ trip.imageRef }}"
+        alt="Card image cap"
+      />
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{ trip.name | uppercase }}</h5>
       <button
@@ -56,41 +61,7 @@
         <ngb-rating [(rate)]="trip.rating"></ngb-rating>
       </li>
       <li class="list-group-item">
-        <div *ngIf="trip.currency === 'dolar'">
-          Price: ${{ trip.price | currencyPipe : "dolar" }}
-        </div>
-        <div *ngIf="trip.currency === 'zloty'">
-          Price: {{ trip.price | currencyPipe : "zloty" }} zł
-        </div>
-        <div *ngIf="trip.currency === 'euro'">
-          Price: {{ trip.price | currencyPipe : "euro" }}€
-        </div>
-        <div class="btn-group" role="group" aria-label="Currency selection">
-          <button
-            type="button"
-            class="btn btn-primary"
-            [ngClass]="{ active: trip.currency === 'dolar' }"
-            (click)="changeCurrency(i, 'dolar')"
-          >
-            USD
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            [ngClass]="{ active: trip.currency === 'zloty' }"
-            (click)="changeCurrency(i, 'zloty')"
-          >
-            PLN
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            [ngClass]="{ active: trip.currency === 'euro' }"
-            (click)="changeCurrency(i, 'euro')"
-          >
-            EUR
-          </button>
-        </div>
+        <div>Price: {{ trip.price | currencyPipe : currency }}</div>
       </li>
       <li class="list-group-item">
         <div>

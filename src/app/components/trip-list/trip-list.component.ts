@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Currency, Trip } from '../models/trip.model';
-import { FilterService } from '../services/filter.service';
+import { Trip } from '../../models/trip.model';
+import { FilterService } from '../../services/filter.service';
 import { CommonModule } from '@angular/common';
 import { TripFormComponent } from '../trip-form/trip-form.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { TripsService } from '../services/trips.service';
-import { CurrencyPipe } from '../trips/currency.pipe';
+import { TripsService } from '../../services/trips.service';
+import { CurrencyPipe } from '../../pipes/currency.pipe';
 import { TripFilterComponent } from '../trip-filter/trip-filter.component';
 import { Observable } from 'rxjs';
-import { ReservationsService } from '../services/reservations.service';
+import { ReservationsService } from '../../services/reservations.service';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -25,6 +26,7 @@ import { ReservationsService } from '../services/reservations.service';
 })
 export class TripListComponent implements OnInit {
   trips: Trip[] = [];
+  currency = 'USD';
   filteredTrips$: Observable<Trip[]> = this.filterService.filteredTrips$;
 
   addReservation = (trip: Trip): void => {
@@ -33,10 +35,6 @@ export class TripListComponent implements OnInit {
 
   removeReservation = (trip: Trip): void => {
     this.tripService.removeReservation(trip);
-  };
-
-  changeCurrency = (index: number, currency: string): void => {
-    this.trips[index].currency = currency as Currency;
   };
 
   deleteTrip = (tripId: string): void => {
@@ -68,12 +66,16 @@ export class TripListComponent implements OnInit {
   constructor(
     private filterService: FilterService,
     private tripService: TripsService,
-    private reservationsService: ReservationsService
+    private reservationsService: ReservationsService,
+    private currencyService: CurrencyService
   ) {}
 
   ngOnInit() {
     this.tripService.trips$.subscribe((trips) => {
       this.trips = trips;
+    });
+    this.currencyService.currency$.subscribe((currency) => {
+      this.currency = currency;
     });
   }
 }

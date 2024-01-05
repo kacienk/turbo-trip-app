@@ -26,41 +26,7 @@
         </li>
         <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
         <li class="list-group-item">
-          <div *ngIf="trip.currency === 'dolar'">
-            Price: ${{ trip.price | currencyPipe : "dolar" }}
-          </div>
-          <div *ngIf="trip.currency === 'zloty'">
-            Price: {{ trip.price | currencyPipe : "zloty" }} zł
-          </div>
-          <div *ngIf="trip.currency === 'euro'">
-            Price: {{ trip.price | currencyPipe : "euro" }}€
-          </div>
-          <div class="btn-group" role="group" aria-label="Currency selection">
-            <button
-              type="button"
-              class="btn btn-primary"
-              [ngClass]="{ active: trip.currency === 'dolar' }"
-              (click)="changeCurrency(trip, 'dolar')"
-            >
-              USD
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              [ngClass]="{ active: trip.currency === 'zloty' }"
-              (click)="changeCurrency(trip, 'zloty')"
-            >
-              PLN
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              [ngClass]="{ active: trip.currency === 'euro' }"
-              (click)="changeCurrency(trip, 'euro')"
-            >
-              EUR
-            </button>
-          </div>
+          Price: ${{ trip.price | currencyPipe : currency }}
         </li>
         <li class="list-group-item">
           <div>

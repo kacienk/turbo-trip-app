@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { ReservationSumComponent } from './reservation-sum/reservation-sum.component';
+import { ReservationSumComponent } from './components/reservation-sum/reservation-sum.component';
 import { FirestoreModule, Firestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { TripsService } from './services/trips.service';
 import _trips from '../assets/trips.json';
 import { ITrip } from './models/trip.model';
+import { CurrencySelectorComponent } from './components/currency-selector/currency-selector.component';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ import { ITrip } from './models/trip.model';
     RouterLinkActive,
     ReservationSumComponent,
     AngularFirestoreModule,
+    CurrencySelectorComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
