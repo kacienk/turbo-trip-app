@@ -8,6 +8,7 @@ import { TripsService } from '../services/trips.service';
 import { CurrencyPipe } from '../trips/currency.pipe';
 import { TripFilterComponent } from '../trip-filter/trip-filter.component';
 import { Observable } from 'rxjs';
+import { ReservationsService } from '../services/reservations.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -38,8 +39,8 @@ export class TripListComponent implements OnInit {
     this.trips[index].currency = currency as Currency;
   };
 
-  removeTrip = (index: number): void => {
-    this.tripService.removeTrip(index);
+  deleteTrip = (tripId: string): void => {
+    this.tripService.deleteTrip(tripId);
   };
 
   maxPrice = (): number => {
@@ -60,9 +61,14 @@ export class TripListComponent implements OnInit {
     return minPrice;
   };
 
+  tripReservations = (tripId: string): number => {
+    return this.reservationsService.getTripReservationsCount(tripId);
+  };
+
   constructor(
     private filterService: FilterService,
-    private tripService: TripsService
+    private tripService: TripsService,
+    private reservationsService: ReservationsService
   ) {}
 
   ngOnInit() {

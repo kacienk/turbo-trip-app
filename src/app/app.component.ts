@@ -4,6 +4,10 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReservationSumComponent } from './reservation-sum/reservation-sum.component';
+import { FirestoreModule, Firestore } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +19,7 @@ import { ReservationSumComponent } from './reservation-sum/reservation-sum.compo
     RouterLink,
     RouterLinkActive,
     ReservationSumComponent,
+    AngularFirestoreModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

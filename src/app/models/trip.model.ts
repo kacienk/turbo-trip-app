@@ -7,6 +7,7 @@ export enum Currency {
 }
 
 export interface ITrip {
+  id: string;
   name: string;
   destinationCountry: string;
   startDate: Date | string;
@@ -20,6 +21,7 @@ export interface ITrip {
 
 export class Trip implements ITrip {
   constructor(data: ITrip) {
+    this.id = data.id;
     this.name = data.name;
     this.destinationCountry = data.destinationCountry;
     this.startDate = new Date(data.startDate);
@@ -34,6 +36,7 @@ export class Trip implements ITrip {
     this.reservedSpots = 0;
   }
 
+  id: string;
   name: string;
   destinationCountry: string;
   startDate: Date;

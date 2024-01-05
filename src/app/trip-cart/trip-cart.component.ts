@@ -3,6 +3,8 @@ import { CartService } from '../services/cart.service';
 import { Currency, Trip } from '../models/trip.model';
 import { CommonModule } from '@angular/common';
 import { CurrencyPipe } from '../trips/currency.pipe';
+import { ReservationsService } from '../services/reservations.service';
+import { Reservation } from '../models/reservation.model';
 
 @Component({
   selector: 'app-trip-cart',
@@ -33,7 +35,11 @@ export class TripCartComponent {
   };
 
   isTripSelected = (trip: Trip): boolean => {
-    return this.selectedTrips.some((selected) => trip.name === selected.name);
+    return this.selectedTrips.some((selected) => trip.id === selected.id);
+  };
+
+  tripReservations = (tripId: string): number => {
+    return this.reservationsService.getTripReservationsCount(tripId);
   };
 
   tripSelectionChange = (trip: Trip): void => {
@@ -47,7 +53,12 @@ export class TripCartComponent {
 
   buy = (): void => {
     this.selectedTrips.forEach((trip) => {
-      trip.takenSpots += trip.reservedSpots;
+      const reservation: Reservation = {
+        userId: 'none',
+        tripId: trip.id,
+        count: trip.reservedSpots,
+      };
+      this.reservationsService.addReservation(reservation);
       this.cartService.removeReservation(trip, trip.reservedSpots);
     });
     this.selectedTrips = [];
@@ -60,7 +71,10 @@ export class TripCartComponent {
     );
   };
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private reservationsService: ReservationsService
+  ) {}
 
   ngOnInit() {
     this.cartService.cart$.subscribe((trips) => {
