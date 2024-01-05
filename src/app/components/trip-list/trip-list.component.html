@@ -10,12 +10,10 @@
           : null
     }"
   >
-    <div class=".circular-image">
-      <img
-        class="card-img-top"
-        src="{{ trip.imageRef }}"
-        alt="Card image cap"
-      />
+    <div class="circular-image-wrapper">
+      <div class="circular-image">
+        <img src="{{ trip.imageRef }}" alt="Card image cap" />
+      </div>
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ trip.name | uppercase }}</h5>
