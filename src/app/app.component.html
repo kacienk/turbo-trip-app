@@ -1,14 +1,22 @@
-<nav
-  class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between"
->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
   <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <a class="navbar-brand" routerLink="/">TurboTrips</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="isMenuCollapsed = !isMenuCollapsed"
+    >
+      &#9776;
+    </button>
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a
             class="nav-link"
             routerLink="/"
-            routerLinkActive="router-link-active"
+            routerLinkActive="active"
+            (click)="isMenuCollapsed = true"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Home</a
           >
         </li>
@@ -16,7 +24,9 @@
           <a
             class="nav-link"
             routerLink="/trips"
-            routerLinkActive="router-link-active"
+            routerLinkActive="active"
+            (click)="isMenuCollapsed = true"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Trips</a
           >
         </li>
@@ -24,7 +34,9 @@
           <a
             class="nav-link"
             routerLink="/cart"
-            routerLinkActive="router-link-active"
+            routerLinkActive="active"
+            (click)="isMenuCollapsed = true"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Cart</a
           >
         </li>
@@ -32,14 +44,17 @@
           <a
             class="nav-link"
             routerLink="/add-trip"
-            routerLinkActive="router-link-active"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Add trip</a
           >
         </li>
       </ul>
     </div>
+    <div>
+      <app-reservation-sum class="navbar-text"></app-reservation-sum>
+    </div>
   </div>
-  <app-reservation-sum class="navbar-text"></app-reservation-sum>
 </nav>
 
 <router-outlet></router-outlet>

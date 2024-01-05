@@ -8,6 +8,9 @@ import { FirestoreModule, Firestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
+import { TripsService } from './services/trips.service';
+import _trips from '../assets/trips.json';
+import { ITrip } from './models/trip.model';
 
 @Component({
   selector: 'app-root',
@@ -26,8 +29,20 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   title = 'turbo-trip-app';
+  isMenuCollapsed = true;
 
-  constructor(private modalService: NgbModal) {}
+  populate = () => {
+    _trips.forEach((trip: ITrip) => {
+      this.tripsService.addTrip(trip);
+    });
+  };
+
+  constructor(
+    private modalService: NgbModal,
+    private tripsService: TripsService
+  ) {
+    //this.populate();
+  }
 
   public open(modal: any): void {
     this.modalService.open(modal);

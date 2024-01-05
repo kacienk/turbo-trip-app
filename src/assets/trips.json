@@ -1,5 +1,6 @@
 [
   {
+    "id": "ewrii-es",
     "name": "Exquisite Weekend Retreat in Israel - Embracing Shalom",
     "destinationCountry": "Israel",
     "startDate": "2024-03-01",
@@ -11,6 +12,7 @@
     "imageRef": "https://www.national-geographic.pl/media/cache/slider_big/uploads/media/default/0014/03/jerusalem-co-warto-zobaczyc-i-jak-ubrac-sie-na-zwiedzanie-jerozolimy-fot-getty-images.jpeg"
   },
   {
+    "id": "lo-arw",
     "name": "London Odyssey - A Royal Welcome",
     "destinationCountry": "United Kingdom",
     "startDate": "2024-02-22",
@@ -22,6 +24,7 @@
     "imageRef": "https://r.pl/welcome-to-london/accommodation-llo?czyCenaZaWszystkich=0&data=20240222&dlugoscPobytu=4&iataWyjazdu=KTW&liczbaPokoi=1&miastoWyjazdu=katowice&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=breakfast"
   },
   {
+    "id": "ejte-hht",
     "name": "Enchanting Journey to Egypt - Hurghada Holiday Tour",
     "destinationCountry": "Egypt",
     "startDate": "2024-01-04",
@@ -33,6 +36,7 @@
     "imageRef": "https://r.pl/egypt-hurghada-holiday-tour/accommodation-egh?czyCenaZaWszystkich=0&data=20240104&dlugoscPobytu=8&iataWyjazdu=WAW&liczbaPokoi=1&miastoWyjazdu=warszawa&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=all-inclusive"
   },
   {
+    "id": "amir-avtos",
     "name": "Arctic Magic in Rovaniemi - A Visit to Santa Claus",
     "destinationCountry": "Finland",
     "startDate": "2024-02-11",
@@ -44,6 +48,7 @@
     "imageRef": "https://r.pl/rovaniemi-visiting-santa-claus/accommodation-rvn?czyCenaZaWszystkich=0&data=20240211&dlugoscPobytu=1&iataWyjazdu=POZ&liczbaPokoi=1&miastoWyjazdu=poznan&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=without-meals"
   },
   {
+    "id": "jttghot",
     "name": "Journey through the Green Hills of Tuscany",
     "destinationCountry": "Italy",
     "startDate": "2024-10-05",
@@ -55,6 +60,7 @@
     "imageRef": "https://r.pl/green-hills-of-tuscany/accommodation-wwt-summer?czyCenaZaWszystkich=0&data=20241005&dlugoscPobytu=5&iataWyjazdu=WAW&liczbaPokoi=1&miastoWyjazdu=warszawa&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=breakfast"
   },
   {
+    "id": "gmf",
     "name": "Good Morning Florence!",
     "destinationCountry": "Italy",
     "startDate": "2024-10-19",
@@ -66,6 +72,7 @@
     "imageRef": "https://r.pl/good-morning-florence/accommodation-wtw-summer?czyCenaZaWszystkich=0&data=20241019&dlugoscPobytu=5&iataWyjazdu=WAW&liczbaPokoi=1&miastoWyjazdu=warszawa&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=breakfast"
   },
   {
+    "id": "hpatmol",
     "name": "Harry Potter and the Magic of London",
     "destinationCountry": "United Kingdom",
     "startDate": "2024-02-01",
@@ -77,6 +84,7 @@
     "imageRef": "https://r.pl/harry-potter-and-the-magic-of-london/accommodation-lfm?czyCenaZaWszystkich=0&data=20240201&dlugoscPobytu=4&iataWyjazdu=KTW&liczbaPokoi=1&miastoWyjazdu=katowice&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=breakfast"
   },
   {
+    "id": "p-faiap-ae",
     "name": "Paris - Family Adventure in Amusement Parks - Airborne Edition",
     "destinationCountry": "France",
     "startDate": "2024-10-16",
@@ -88,6 +96,7 @@
     "imageRef": "https://r.pl/paris-family-amusement-parks-airborne-version/accommodation-family-parks?czyCenaZaWszystkich=0&data=20241016&dlugoscPobytu=5&iataWyjazdu=WAW&liczbaPokoi=1&miastoWyjazdu=warszawa&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=breakfast"
   },
   {
+    "id": "f-tp",
     "name": "Fairy-tale Paris",
     "destinationCountry": "France",
     "startDate": "2024-10-23",
@@ -99,6 +108,7 @@
     "imageRef": "https://r.pl/fairy-tale-paris/accommodation-disney?czyCenaZaWszystkich=0&data=20241023&dlugoscPobytu=5&iataWyjazdu=WAW&liczbaPokoi=1&miastoWyjazdu=warszawa&wiek=1993-01-01&wiek=1993-01-01&wyzywienie=breakfast"
   },
   {
+    "id": "bp",
     "name": "Bonjour Paris!",
     "destinationCountry": "France",
     "startDate": "2024-10-23",
