@@ -92,6 +92,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "turbo-trip-app:build:production",
+              "serveTarget": "turbo-trip-app:serve:production"
+            },
+            "development": {
+              "buildTarget": "turbo-trip-app:build:development",
+              "serveTarget": "turbo-trip-app:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

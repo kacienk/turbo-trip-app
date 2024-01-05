@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "turbo-trip-app",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

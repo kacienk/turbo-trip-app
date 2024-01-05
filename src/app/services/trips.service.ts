@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Trip } from '../models/trip.model';
+import { AngularFireDatabase } from '@angular/fire/database';
 import _trips from '../../assets/trips.json';
 
 @Injectable({

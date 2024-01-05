@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "turbotripapp": {
+      "hosting": {
+        "turbo-trip-app": [
+          "turbotripapp"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "turbotripapp"
+  }
+}
