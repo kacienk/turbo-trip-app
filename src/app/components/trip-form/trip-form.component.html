@@ -1,195 +1,206 @@
-<form [formGroup]="tripForm" (ngSubmit)="addTrip()" class="trip-form">
-  <div class="form-group">
-    <label for="id">Identifier (optional):</label>
-    <input type="text" id="id" formControlName="id" class="form-control" />
-    <div *ngIf="tripForm.get('id')?.hasError('pattern')" class="error-message">
-      Identifier may consist only of small letters, digits or '-';
+<div class="container mt-5">
+  <form [formGroup]="tripForm" (ngSubmit)="addTrip()" class="trip-form">
+    <div class="form-group">
+      <label for="id">Identifier (optional):</label>
+      <input type="text" id="id" formControlName="id" class="form-control" />
+      <div
+        *ngIf="tripForm.get('id')?.hasError('pattern')"
+        class="error-message"
+      >
+        Identifier may consist only of small letters, digits or '-';
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="name">Name:</label>
-    <input type="text" id="name" formControlName="name" class="form-control" />
-    <div
-      *ngIf="
-        tripForm.get('name')?.hasError('required') &&
-        tripForm.get('name')?.touched
-      "
-      class="error-message"
-    >
-      Name is required.
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('name')?.hasError('required') &&
+          tripForm.get('name')?.touched
+        "
+        class="error-message"
+      >
+        Name is required.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="destinationCountry">Destination Country:</label>
-    <input
-      type="text"
-      id="destinationCountry"
-      formControlName="destinationCountry"
-      class="form-control"
-    />
-    <div
-      *ngIf="
-        tripForm.get('destinationCountry')?.hasError('required') &&
-        tripForm?.get('destinationCountry')?.touched
-      "
-      class="error-message"
-    >
-      Destination Country is required.
+    <div class="form-group">
+      <label for="destinationCountry">Destination Country:</label>
+      <input
+        type="text"
+        id="destinationCountry"
+        formControlName="destinationCountry"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('destinationCountry')?.hasError('required') &&
+          tripForm?.get('destinationCountry')?.touched
+        "
+        class="error-message"
+      >
+        Destination Country is required.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="startDate">Start Date:</label>
-    <input
-      type="date"
-      id="startDate"
-      formControlName="startDate"
-      class="form-control"
-    />
-    <div
-      *ngIf="
-        tripForm.get('startDate')?.hasError('required') &&
-        tripForm.get('startDate')?.touched
-      "
-      class="error-message"
-    >
-      Start Date is required.
+    <div class="form-group">
+      <label for="startDate">Start Date:</label>
+      <input
+        type="date"
+        id="startDate"
+        formControlName="startDate"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('startDate')?.hasError('required') &&
+          tripForm.get('startDate')?.touched
+        "
+        class="error-message"
+      >
+        Start Date is required.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="endDate">End Date:</label>
-    <input
-      type="date"
-      id="endDate"
-      formControlName="endDate"
-      class="form-control"
-    />
-    <div
-      *ngIf="
-        tripForm.get('endDate')?.hasError('required') &&
-        tripForm.get('endDate')?.touched
-      "
-      class="error-message"
-    >
-      End Date is required.
+    <div class="form-group">
+      <label for="endDate">End Date:</label>
+      <input
+        type="date"
+        id="endDate"
+        formControlName="endDate"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('endDate')?.hasError('required') &&
+          tripForm.get('endDate')?.touched
+        "
+        class="error-message"
+      >
+        End Date is required.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="price">Price ({{ currency }}):</label>
-    <input
-      type="number"
-      id="price"
-      formControlName="price"
-      class="form-control"
-    />
-    <div
-      *ngIf="
-        tripForm.get('price')?.hasError('required') &&
-        tripForm.get('price')?.touched
-      "
-      class="error-message"
-    >
-      Price is required.
+    <div class="form-group">
+      <label for="price">Price ({{ currency }}):</label>
+      <input
+        type="number"
+        id="price"
+        formControlName="price"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('price')?.hasError('required') &&
+          tripForm.get('price')?.touched
+        "
+        class="error-message"
+      >
+        Price is required.
+      </div>
+      <div
+        *ngIf="
+          tripForm.get('price')?.hasError('min') &&
+          tripForm.get('price')?.touched
+        "
+        class="error-message"
+      >
+        Price must be greater than or equal to 0.
+      </div>
     </div>
-    <div
-      *ngIf="
-        tripForm.get('price')?.hasError('min') && tripForm.get('price')?.touched
-      "
-      class="error-message"
-    >
-      Price must be greater than or equal to 0.
-    </div>
-  </div>
 
-  <div class="form-group">
-    <label for="maxSpots">Max Spots:</label>
-    <input
-      type="number"
-      id="maxSpots"
-      formControlName="maxSpots"
-      class="form-control"
-    />
-    <div
-      *ngIf="
-        tripForm.get('maxSpots')?.hasError('required') &&
-        tripForm.get('maxSpots')?.touched
-      "
-      class="error-message"
-    >
-      Max Spots is required.
+    <div class="form-group">
+      <label for="maxSpots">Max Spots:</label>
+      <input
+        type="number"
+        id="maxSpots"
+        formControlName="maxSpots"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('maxSpots')?.hasError('required') &&
+          tripForm.get('maxSpots')?.touched
+        "
+        class="error-message"
+      >
+        Max Spots is required.
+      </div>
+      <div
+        *ngIf="
+          tripForm.get('maxSpots')?.hasError('min') &&
+          tripForm.get('maxSpots')?.touched
+        "
+        class="error-message"
+      >
+        Max Spots must be greater than or equal to 1.
+      </div>
     </div>
-    <div
-      *ngIf="
-        tripForm.get('maxSpots')?.hasError('min') &&
-        tripForm.get('maxSpots')?.touched
-      "
-      class="error-message"
-    >
-      Max Spots must be greater than or equal to 1.
-    </div>
-  </div>
 
-  <div class="form-group">
-    <label for="takenSpots">Taken Spots:</label>
-    <input
-      type="number"
-      id="takenSpots"
-      formControlName="takenSpots"
-      class="form-control"
-    />
-    <div
-      *ngIf="
-        tripForm.get('takenSpots')?.hasError('min') &&
-        tripForm.get('takenSpots')?.touched
-      "
-      class="error-message"
-    >
-      Taken Spots must be greater than or equal to 0.
+    <div class="form-group">
+      <label for="takenSpots">Taken Spots:</label>
+      <input
+        type="number"
+        id="takenSpots"
+        formControlName="takenSpots"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('takenSpots')?.hasError('min') &&
+          tripForm.get('takenSpots')?.touched
+        "
+        class="error-message"
+      >
+        Taken Spots must be greater than or equal to 0.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="description">Description:</label>
-    <textarea
-      id="description"
-      formControlName="description"
-      class="form-control"
-    ></textarea>
-    <div
-      *ngIf="
-        tripForm.get('description')?.hasError('required') &&
-        tripForm.get('description')?.touched
-      "
-      class="error-message"
-    >
-      Description is required.
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+      <div
+        *ngIf="
+          tripForm.get('description')?.hasError('required') &&
+          tripForm.get('description')?.touched
+        "
+        class="error-message"
+      >
+        Description is required.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="imageRef">Image Reference:</label>
-    <input
-      type="text"
-      id="imageRef"
-      formControlName="imageRef"
-      class="form-control"
-    />
-    <div
-      *ngIf="
-        tripForm.get('imageRef')?.hasError('required') &&
-        tripForm.get('imageRef')?.touched
-      "
-      class="error-message"
-    >
-      Image Reference is required.
+    <div class="form-group">
+      <label for="imageRef">Image Reference:</label>
+      <input
+        type="text"
+        id="imageRef"
+        formControlName="imageRef"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          tripForm.get('imageRef')?.hasError('required') &&
+          tripForm.get('imageRef')?.touched
+        "
+        class="error-message"
+      >
+        Image Reference is required.
+      </div>
     </div>
-  </div>
 
-  <button type="submit" [disabled]="tripForm.invalid" class="btn btn-primary">
-    Add Trip
-  </button>
-</form>
+    <button type="submit" [disabled]="tripForm.invalid" class="btn btn-primary">
+      Add Trip
+    </button>
+  </form>
+</div>

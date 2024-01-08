@@ -36,12 +36,10 @@ export class TripsService {
       .valueChanges({ idField: 'id' })
       .subscribe((trips) => {
         this.tripsSubject.next(trips.map((trip: ITrip) => new Trip(trip)));
-        console.log(trips.map((trip: ITrip) => new Trip(trip)));
       });
   }
 
   addTrip(trip: ITrip): Promise<void> {
-    console.log(trip);
     const tripsCollection = this.store.collection<ITrip>('trips');
     return tripsCollection.doc(trip.id).set(trip);
   }

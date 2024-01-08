@@ -59,10 +59,6 @@ export class TripListComponent implements OnInit {
   };
 
   viewDetails(tripId: string): void {
-    // Optional: Perform custom action when clicking on the image
-    console.log(`Clicked on the image of trip with ID ${tripId}`);
-
-    // Navigate to the detailed view
     this.router.navigate(['/trip', tripId]);
   }
 
