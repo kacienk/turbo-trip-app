@@ -7,14 +7,14 @@ import { ReservationsService } from '../../services/reservations.service';
 import { Reservation } from '../../models/reservation.model';
 import { CurrencyService } from '../../services/currency.service';
 import { OnsiteReservationsService } from '../../services/onsite-reservations.service';
-import { OnsiteReservaionComponent } from '../onsite-reservaion/onsite-reservaion.component';
+import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reservation.component';
 
 @Component({
   selector: 'app-trip-cart',
   standalone: true,
   templateUrl: './trip-cart.component.html',
   styleUrl: './trip-cart.component.css',
-  imports: [CommonModule, CurrencyPipe, OnsiteReservaionComponent],
+  imports: [CommonModule, CurrencyPipe, OnsiteReservationComponent],
 })
 export class TripCartComponent implements OnInit {
   tripsInCart: Trip[] = [];

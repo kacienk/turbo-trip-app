@@ -3,13 +3,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { OnsiteReservationsService } from '../../services/onsite-reservations.service';
 
 @Component({
-  selector: 'app-onsite-reservaion',
+  selector: 'app-onsite-reservation',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './onsite-reservaion.component.html',
-  styleUrl: './onsite-reservaion.component.css',
+  templateUrl: './onsite-reservation.component.html',
+  styleUrl: './onsite-reservation.component.css',
 })
-export class OnsiteReservaionComponent implements OnInit {
+export class OnsiteReservationComponent implements OnInit {
   onsiteReservations: string[] = [];
   @Input() tripId: string = '';
   @Input() takenSpots: number = 0;

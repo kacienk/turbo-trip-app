@@ -1,68 +1,49 @@
-<div *ngFor="let trip of filteredTrips$ | async; index as i">
-  <div
-    class="card"
-    [ngStyle]="{
-      'border-color':
-        trip.price == maxPrice()
-          ? 'red'
-          : trip.price == minPrice()
-          ? 'green'
-          : null
-    }"
-  >
-    <div class="circular-image-wrapper">
-      <div class="circular-image">
-        <img
-          src="{{ trip.imageRef }}"
-          alt="Card image cap"
-          (click)="viewDetails(trip.id)"
-        />
+<div class="trip-list-wrapper">
+  <div *ngFor="let trip of filteredTrips$ | async; index as i">
+    <div
+      class="card"
+      [ngStyle]="{
+        'border-color':
+          trip.price == maxPrice()
+            ? 'red'
+            : trip.price == minPrice()
+            ? 'green'
+            : null
+      }"
+    >
+      <div class="circular-image-wrapper">
+        <div class="circular-image">
+          <img
+            src="{{ trip.imageRef }}"
+            alt="Card image cap"
+            (click)="viewDetails(trip.id)"
+          />
+        </div>
       </div>
+      <div class="card-body">
+        <h5 class="card-title trip-name" (click)="viewDetails(trip.id)">
+          {{ trip.name | uppercase }}
+        </h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Destination: {{ trip.destinationCountry | uppercase }}
+        </li>
+        <li class="list-group-item">
+          Duration: {{ trip.startDate | date : "d.M.yyyy" }} -
+          {{ trip.endDate | date : "d.M.yyyy" }}
+        </li>
+        <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
+        <li class="list-group-item">
+          <div>Price: {{ trip.price | currencyPipe : currency }}</div>
+        </li>
+        <li class="list-group-item">
+          <app-onsite-reservation
+            [tripId]="trip.id"
+            [maxSpots]="trip.maxSpots"
+          />
+        </li>
+      </ul>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ trip.name | uppercase }}</h5>
-      <button
-        type="button"
-        class="btn btn-outline-danger"
-        (click)="deleteTrip(trip.id)"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-trash"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
-          ></path>
-          <path
-            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
-          ></path>
-        </svg>
-        Remove trip
-      </button>
-      <p class="card-text">{{ trip.description }}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        Destination: {{ trip.destinationCountry | uppercase }}
-      </li>
-      <li class="list-group-item">
-        Duration: {{ trip.startDate | date : "d.M.yyyy" }} -
-        {{ trip.endDate | date : "d.M.yyyy" }}
-      </li>
-      <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
-      <li class="list-group-item">
-        <ngb-rating [(rate)]="trip.rating"></ngb-rating>
-      </li>
-      <li class="list-group-item">
-        <div>Price: {{ trip.price | currencyPipe : currency }}</div>
-      </li>
-      <li class="list-group-item">
-        <app-onsite-reservaion [tripId]="trip.id" [maxSpots]="trip.maxSpots" />
-      </li>
-    </ul>
   </div>
 </div>

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { ReservationsService } from '../../services/reservations.service';
 import { CurrencyService } from '../../services/currency.service';
 import { Router } from '@angular/router';
-import { OnsiteReservaionComponent } from '../onsite-reservaion/onsite-reservaion.component';
+import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reservation.component';
 
 @Component({
   selector: 'app-trip-list',
@@ -24,7 +24,7 @@ import { OnsiteReservaionComponent } from '../onsite-reservaion/onsite-reservaio
     TripFormComponent,
     NgbRatingModule,
     TripFilterComponent,
-    OnsiteReservaionComponent,
+    OnsiteReservationComponent,
   ],
 })
 export class TripListComponent implements OnInit {

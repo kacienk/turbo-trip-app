@@ -1,8 +1,12 @@
+.trip-list-wrapper {
+  min-width: 100%;
+}
+
 .card {
   margin-bottom: 10px;
   margin-left: 2%;
   margin-right: 2%;
-  max-width: 1350px;
+  width: 95%;
 }
 
 .card-columns {
@@ -29,8 +33,24 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
+
+  cursor: pointer;
+}
+
+.trip-name {
+  cursor: pointer;
+}
+
+.trip-name:hover {
+  color: rgb(173, 173, 173);
 }
 
 .reservation-button:hover {
   color: rgb(173, 173, 173);
+}
+
+@media (min-width: 700px) {
+  .trip-list-wrapper {
+    min-width: 700px;
+  }
 }
