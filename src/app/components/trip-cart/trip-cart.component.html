@@ -16,79 +16,18 @@
           Destination: {{ trip.destinationCountry | uppercase }}
         </li>
         <li class="list-group-item">
-          Duration:
-          {{ trip.startDate.getDay() }}.{{ trip.startDate.getMonth() }}.{{
-            trip.startDate.getFullYear()
-          }}
-          - {{ trip.endDate.getDay() }}.{{ trip.endDate.getMonth() }}.{{
-            trip.endDate.getFullYear()
-          }}
+          Duration: {{ trip.startDate | date : "d.M.yyyy" }} -
+          {{ trip.endDate | date : "d.M.yyyy" }}
         </li>
         <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
         <li class="list-group-item">
           Price: ${{ trip.price | currencyPipe : currency }}
         </li>
         <li class="list-group-item">
-          <div>
-            <div
-              *ngIf="
-                trip.maxSpots -
-                  (trip.reservedSpots + tripReservations(trip.id)) >
-                  0;
-                else noSpots
-              "
-              [ngStyle]="
-                trip.maxSpots -
-                  (trip.reservedSpots + tripReservations(trip.id)) >
-                4
-                  ? { color: 'black' }
-                  : { color: 'blue' }
-              "
-            >
-              There are
-              {{
-                trip.maxSpots - (trip.reservedSpots + tripReservations(trip.id))
-              }}
-              spots left.
-            </div>
-            <ng-template #noSpots
-              ><div style="color: red">
-                There are no spots available!
-              </div></ng-template
-            >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="currentColor"
-              class="bi bi-plus reservation-button"
-              viewBox="0 0 16 16"
-              (click)="addReservation(trip)"
-              *ngIf="
-                trip.maxSpots -
-                  (trip.reservedSpots + tripReservations(trip.id)) >
-                0
-              "
-            >
-              <path
-                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="currentColor"
-              class="bi bi-dash reservation-button"
-              viewBox="0 0 16 16"
-              (click)="removeReservation(trip)"
-              *ngIf="trip.reservedSpots > 0"
-            >
-              <path
-                d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"
-              />
-            </svg>
-          </div>
+          <app-onsite-reservaion
+            [tripId]="trip.id"
+            [maxSpots]="trip.maxSpots"
+          />
         </li>
       </ul>
     </div>

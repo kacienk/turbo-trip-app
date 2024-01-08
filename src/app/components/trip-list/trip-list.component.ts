@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ReservationsService } from '../../services/reservations.service';
 import { CurrencyService } from '../../services/currency.service';
 import { Router } from '@angular/router';
+import { OnsiteReservaionComponent } from '../onsite-reservaion/onsite-reservaion.component';
 
 @Component({
   selector: 'app-trip-list',
@@ -23,20 +24,13 @@ import { Router } from '@angular/router';
     TripFormComponent,
     NgbRatingModule,
     TripFilterComponent,
+    OnsiteReservaionComponent,
   ],
 })
 export class TripListComponent implements OnInit {
   trips: Trip[] = [];
   currency = 'USD';
   filteredTrips$: Observable<Trip[]> = this.filterService.filteredTrips$;
-
-  addReservation = (trip: Trip): void => {
-    this.tripService.addReservation(trip);
-  };
-
-  removeReservation = (trip: Trip): void => {
-    this.tripService.removeReservation(trip);
-  };
 
   deleteTrip = (tripId: string): void => {
     this.tripService.deleteTrip(tripId);

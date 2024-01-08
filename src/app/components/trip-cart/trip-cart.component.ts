@@ -6,17 +6,20 @@ import { CurrencyPipe } from '../../pipes/currency.pipe';
 import { ReservationsService } from '../../services/reservations.service';
 import { Reservation } from '../../models/reservation.model';
 import { CurrencyService } from '../../services/currency.service';
+import { OnsiteReservationsService } from '../../services/onsite-reservations.service';
+import { OnsiteReservaionComponent } from '../onsite-reservaion/onsite-reservaion.component';
 
 @Component({
   selector: 'app-trip-cart',
   standalone: true,
   templateUrl: './trip-cart.component.html',
   styleUrl: './trip-cart.component.css',
-  imports: [CommonModule, CurrencyPipe],
+  imports: [CommonModule, CurrencyPipe, OnsiteReservaionComponent],
 })
 export class TripCartComponent implements OnInit {
   tripsInCart: Trip[] = [];
   selectedTrips: Trip[] = [];
+  onsiteReservations: string[] = [];
   currency = 'USD';
 
   addReservation = (trip: Trip): void => {
