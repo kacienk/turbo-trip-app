@@ -12,7 +12,11 @@
   >
     <div class="circular-image-wrapper">
       <div class="circular-image">
-        <img src="{{ trip.imageRef }}" alt="Card image cap" />
+        <img
+          src="{{ trip.imageRef }}"
+          alt="Card image cap"
+          (click)="viewDetails(trip.id)"
+        />
       </div>
     </div>
     <div class="card-body">
@@ -46,13 +50,8 @@
         Destination: {{ trip.destinationCountry | uppercase }}
       </li>
       <li class="list-group-item">
-        Duration:
-        {{ trip.startDate.getDay() }}.{{ trip.startDate.getMonth() }}.{{
-          trip.startDate.getFullYear()
-        }}
-        - {{ trip.endDate.getDay() }}.{{ trip.endDate.getMonth() }}.{{
-          trip.endDate.getFullYear()
-        }}
+        Duration: {{ trip.startDate | date : "d.M.yyyy" }} -
+        {{ trip.endDate | date : "d.M.yyyy" }}
       </li>
       <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
       <li class="list-group-item">

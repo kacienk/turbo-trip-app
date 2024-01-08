@@ -5,12 +5,12 @@ import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(
-      AngularFireModule.initializeApp(environment.firebaseConfig)
-    ),
-  ],
+    importProvidersFrom(AngularFireModule.initializeApp(environment.firebaseConfig)),
+    provideAnimations()
+],
 };

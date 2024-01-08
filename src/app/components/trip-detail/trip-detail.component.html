@@ -1,0 +1,149 @@
+<div *ngIf="trip; else loading" style="padding: 10px">
+  <div class="card">
+    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#imageCarousel"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Image 1"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{{ trip.imageRef }}" class="d-block w-100" alt="Image 1" />
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="title-wrapper">
+        <h3 class="card-title" style="margin-bottom: 0px">
+          {{ trip.name | uppercase }}
+        </h3>
+        <div class="manage-buttons">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="deleteTrip()"
+            style="margin-right: 10px"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-trash"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+              ></path>
+              <path
+                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+              ></path>
+            </svg>
+            Manage details
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="deleteTrip()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-trash"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+              ></path>
+              <path
+                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+              ></path>
+            </svg>
+            Delete trip
+          </button>
+        </div>
+      </div>
+      <p class="card-text">{{ trip.description }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        Destination: {{ trip.destinationCountry | uppercase }}
+      </li>
+      <li class="list-group-item">
+        Duration: {{ trip.startDate | date : "d.M.yyyy" }} -
+        {{ trip.endDate | date : "d.M.yyyy" }}
+      </li>
+      <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
+      <li class="list-group-item">
+        <ngb-rating [(rate)]="trip.rating"></ngb-rating>
+      </li>
+      <li class="list-group-item">
+        <div>Price: {{ trip.price | currencyPipe : currency }}</div>
+      </li>
+      <li class="list-group-item">
+        <div>
+          <div
+            *ngIf="
+              trip.maxSpots - (trip.reservedSpots + tripReservations()) > 0;
+              else noSpots
+            "
+            [ngStyle]="
+              trip.maxSpots - (trip.reservedSpots + tripReservations()) > 4
+                ? { color: 'black' }
+                : { color: 'blue' }
+            "
+          >
+            There are
+            {{ trip.maxSpots - (trip.reservedSpots + tripReservations()) }}
+            spots left.
+          </div>
+          <ng-template #noSpots
+            ><div style="color: red">
+              There are no spots available!
+            </div></ng-template
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            class="bi bi-plus reservation-button"
+            viewBox="0 0 16 16"
+            (click)="addReservation()"
+            *ngIf="
+              trip.maxSpots - (trip.reservedSpots + tripReservations()) > 0
+            "
+          >
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+            />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            class="bi bi-dash reservation-button"
+            viewBox="0 0 16 16"
+            (click)="removeReservation()"
+            *ngIf="trip.reservedSpots > 0"
+          >
+            <path
+              d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"
+            />
+          </svg>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="spinner-border" role="status"></div>
+</ng-template>

@@ -10,6 +10,7 @@ import { TripFilterComponent } from '../trip-filter/trip-filter.component';
 import { Observable } from 'rxjs';
 import { ReservationsService } from '../../services/reservations.service';
 import { CurrencyService } from '../../services/currency.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip-list',
@@ -63,7 +64,16 @@ export class TripListComponent implements OnInit {
     return this.reservationsService.getTripReservationsCount(tripId);
   };
 
+  viewDetails(tripId: string): void {
+    // Optional: Perform custom action when clicking on the image
+    console.log(`Clicked on the image of trip with ID ${tripId}`);
+
+    // Navigate to the detailed view
+    this.router.navigate(['/trip', tripId]);
+  }
+
   constructor(
+    private router: Router,
     private filterService: FilterService,
     private tripService: TripsService,
     private reservationsService: ReservationsService,
