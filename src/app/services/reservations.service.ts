@@ -16,7 +16,6 @@ export class ReservationsService {
       .valueChanges()
       .subscribe((reservations) => {
         this.reservationsSubject.next(reservations);
-        console.log(reservations);
       });
   }
 

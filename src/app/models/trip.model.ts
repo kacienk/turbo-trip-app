@@ -19,7 +19,6 @@ export class Trip implements ITrip {
     this.name = data.name;
     this.destinationCountry = data.destinationCountry;
     this.startDate = new Date(data.startDate);
-    console.log(this.name, this.startDate, data.startDate);
     this.endDate = new Date(data.endDate);
     this.price = data.price;
     this.maxSpots = data.maxSpots;

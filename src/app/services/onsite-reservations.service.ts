@@ -24,13 +24,10 @@ export class OnsiteReservationsService {
 
   removeReservation = (tripId: string): void => {
     const currentOnSiteReservations = this.onsiteReservationsSubject.value;
-    console.debug(currentOnSiteReservations);
     const indexToRemove = currentOnSiteReservations.indexOf(tripId);
-    console.debug(indexToRemove);
 
     if (indexToRemove != -1) {
       currentOnSiteReservations.splice(indexToRemove, 1);
-      console.debug(currentOnSiteReservations);
       this.onsiteReservationsSubject.next(currentOnSiteReservations);
     }
   };
@@ -41,7 +38,6 @@ export class OnsiteReservationsService {
       this.onsiteReservations$,
     ]).pipe(
       map(([trips, onsiteReservations]) => {
-        console.log(`aaaaa ${JSON.stringify(onsiteReservations)}`);
         return trips
           .filter((trip) => onsiteReservations.includes(trip.id))
           .reduce(
