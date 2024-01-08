@@ -2,12 +2,12 @@
   <div
     class="reservation-count-box"
     [ngStyle]="{
-      'background-color': currentlyReserved() < 10 ? 'red' : 'green'
+      'background-color': reservationsCount < 10 ? 'red' : 'green'
     }"
   >
-    Currently reserved: {{ currentlyReserved() }}
+    Currently reserved: {{ reservationsCount }}
   </div>
   <div class="reservation-sum-box">
-    {{ reservationSum() | currencyPipe : currency }}
+    {{ reservationsValue | currencyPipe : currency }}
   </div>
 </div>

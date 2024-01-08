@@ -34,18 +34,10 @@ export class ReservationSumComponent implements OnInit {
         this.reservationsCount = onsiteReservations.length;
       }
     );
-    combineLatest([
-      this.tripsService.trips$,
-      this.onsiteReservationsService.onsiteReservations$,
-    ]).pipe(
-      map(([trips, onsiteReservations]) => {
-        this.reservationsValue = trips
-          .filter((trip) => onsiteReservations.includes(trip.id))
-          .reduce(
-            (result, trip) => result + trip.price * trip.reservedSpots,
-            0
-          );
-      })
+    this.onsiteReservationsService.onsiteReservationsValue$.subscribe(
+      (value) => {
+        this.reservationsValue = value;
+      }
     );
   }
 }

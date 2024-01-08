@@ -35,6 +35,6 @@
   <button class="btn btn-primary" (click)="buy()" style="margin: 10px">
     Buy
   </button>
-  <p class="cart-cost">${{ selectedTripsValue() }}</p>
+  <p class="cart-cost">{{ selectedTripsValue() | currencyPipe : currency }}</p>
 </div>
 <ng-template #cartEmpty><p>Cart is empty!</p></ng-template>

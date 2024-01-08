@@ -23,12 +23,4 @@ export class CartService {
       })
     );
   }
-
-  addReservation = (trip: Trip): void => {
-    this.tripsService.addReservation(trip);
-  };
-
-  removeReservation = (trip: Trip, count?: number): void => {
-    this.tripsService.removeReservation(trip, count);
-  };
 }

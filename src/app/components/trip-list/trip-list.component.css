@@ -9,18 +9,6 @@
   column-count: 4;
 }
 
-.reservation-button {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-
-  align-self: center;
-  justify-self: flex-end;
-  cursor: pointer;
-}
-
 .circular-image-wrapper {
   display: flex;
   justify-content: center;

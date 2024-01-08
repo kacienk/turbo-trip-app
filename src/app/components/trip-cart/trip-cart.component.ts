@@ -19,21 +19,7 @@ import { OnsiteReservaionComponent } from '../onsite-reservaion/onsite-reservaio
 export class TripCartComponent implements OnInit {
   tripsInCart: Trip[] = [];
   selectedTrips: Trip[] = [];
-  onsiteReservations: string[] = [];
   currency = 'USD';
-
-  addReservation = (trip: Trip): void => {
-    this.cartService.addReservation(trip);
-  };
-
-  removeReservation = (trip: Trip): void => {
-    if (trip.reservedSpots <= 1 && this.selectedTrips.includes(trip)) {
-      const indexToRemove = this.selectedTrips.indexOf(trip);
-      this.selectedTrips.splice(indexToRemove, 1);
-    }
-
-    this.cartService.removeReservation(trip);
-  };
 
   isTripSelected = (trip: Trip): boolean => {
     return this.selectedTrips.some((selected) => trip.id === selected.id);
@@ -60,29 +46,40 @@ export class TripCartComponent implements OnInit {
         count: trip.reservedSpots,
       };
       this.reservationsService.addReservation(reservation);
-      this.cartService.removeReservation(trip, trip.reservedSpots);
+      //this.cartService.removeReservation(trip, trip.reservedSpots);
     });
     this.selectedTrips = [];
   };
 
   selectedTripsValue = (): number => {
-    return this.selectedTrips.reduce(
-      (result, trip) => result + trip.price * trip.reservedSpots,
-      0
-    );
+    return this.selectedTrips.reduce((result, trip) => {
+      return (
+        result +
+        trip.price *
+          this.onsiteReservationService.getTripReservationsCount(trip.id)
+      );
+    }, 0);
   };
 
   constructor(
     private cartService: CartService,
     private reservationsService: ReservationsService,
-    private currencyService: CurrencyService
+    private currencyService: CurrencyService,
+    private onsiteReservationService: OnsiteReservationsService
   ) {}
 
   ngOnInit() {
     this.cartService.cart$.subscribe((trips) => {
       this.tripsInCart = trips;
     });
-    this.selectedTrips = this.selectedTrips.concat(this.tripsInCart);
+    this.selectedTrips = [...this.tripsInCart];
+    this.onsiteReservationService.onsiteReservations$.subscribe(
+      (onsiteReservations) => {
+        this.selectedTrips = this.selectedTrips.filter((trip) =>
+          onsiteReservations.includes(trip.id)
+        );
+      }
+    );
     this.currencyService.currency$.subscribe((currency) => {
       this.currency = currency;
     });
