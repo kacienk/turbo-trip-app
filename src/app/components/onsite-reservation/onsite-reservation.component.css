@@ -1,3 +1,8 @@
+.onsite-reservation-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
 .reservation-button {
   user-select: none;
   -webkit-user-select: none;
@@ -8,4 +13,13 @@
   align-self: center;
   justify-self: flex-end;
   cursor: pointer;
+
+  color: #eee;
+  background-color: rgb(68, 68, 68);
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+.reservation-button:hover {
+  background-color: rgb(94, 94, 94);
 }

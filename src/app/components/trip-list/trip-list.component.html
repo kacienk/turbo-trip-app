@@ -1,49 +1,67 @@
-<div class="trip-list-wrapper">
-  <div *ngFor="let trip of filteredTrips$ | async; index as i">
-    <div
-      class="card"
-      [ngStyle]="{
-        'border-color':
-          trip.price == maxPrice()
-            ? 'red'
-            : trip.price == minPrice()
-            ? 'green'
-            : null
-      }"
-    >
-      <div class="circular-image-wrapper">
-        <div class="circular-image">
-          <img
-            src="{{ trip.imageRef }}"
-            alt="Card image cap"
-            (click)="viewDetails(trip.id)"
-          />
-        </div>
+<div class="card-grid">
+  <div
+    *ngFor="let trip of getCurrentPageItems()"
+    class="card"
+    [ngStyle]="{
+      'border-color':
+        trip.price == maxPrice()
+          ? 'red'
+          : trip.price == minPrice()
+          ? 'green'
+          : null
+    }"
+  >
+    <div class="circular-image-wrapper">
+      <div class="circular-image">
+        <img
+          src="{{ trip.imageRef }}"
+          alt="Card image cap"
+          (click)="viewDetails(trip.id)"
+        />
       </div>
-      <div class="card-body">
-        <h5 class="card-title trip-name" (click)="viewDetails(trip.id)">
-          {{ trip.name | uppercase }}
-        </h5>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          Destination: {{ trip.destinationCountry | uppercase }}
-        </li>
-        <li class="list-group-item">
-          Duration: {{ trip.startDate | date : "d.M.yyyy" }} -
-          {{ trip.endDate | date : "d.M.yyyy" }}
-        </li>
-        <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
-        <li class="list-group-item">
-          <div>Price: {{ trip.price | currencyPipe : currency }}</div>
-        </li>
-        <li class="list-group-item">
-          <app-onsite-reservation
-            [tripId]="trip.id"
-            [maxSpots]="trip.maxSpots"
-          />
-        </li>
-      </ul>
     </div>
+    <div class="card-body">
+      <h5 class="card-title trip-name" (click)="viewDetails(trip.id)">
+        {{ trip.name | uppercase }}
+      </h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        Destination: {{ trip.destinationCountry | uppercase }}
+      </li>
+      <li class="list-group-item">
+        Duration: {{ trip.startDate | date : "d.M.yyyy" }} -
+        {{ trip.endDate | date : "d.M.yyyy" }}
+      </li>
+      <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
+      <li class="list-group-item">
+        <div>Price: {{ trip.price | currencyPipe : currency }}</div>
+      </li>
+      <li class="list-group-item">
+        <app-onsite-reservation [tripId]="trip.id" [maxSpots]="trip.maxSpots" />
+      </li>
+    </ul>
   </div>
+</div>
+<div class="paginator-wrapper">
+  <ngb-pagination
+    [collectionSize]="filteredTrips.length"
+    [(page)]="currentPage"
+    [pageSize]="pageSize"
+    [maxSize]="5"
+    [rotate]="true"
+    [ellipses]="false"
+    [boundaryLinks]="true"
+    (pageChange)="setPage(currentPage)"
+  />
+
+  <select class="form-select" id="pageSizeSelect" (change)="onChange($event)">
+    <option
+      *ngFor="let _pageSize of pageSizes"
+      [value]="_pageSize"
+      [selected]="pageSize === _pageSize"
+    >
+      {{ _pageSize }}
+    </option>
+  </select>
 </div>

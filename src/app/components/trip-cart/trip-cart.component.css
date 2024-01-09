@@ -5,6 +5,33 @@
   border-radius: 8px;
   border: 1pt black solid;
   margin-bottom: 0px;
-  margin-right: 10px;
   padding: 8px;
+}
+
+.trip-item {
+  margin-bottom: 10px;
+}
+
+.trip-name-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.trip-name {
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+.sum-trip-cost {
+  margin-left: 20px;
+  color: rgb(114, 114, 114);
+}
+
+.form-check-input {
+  margin-top: 0px;
+}
+
+.cart-summary {
+  display: inline-flex;
+  align-items: center;
 }

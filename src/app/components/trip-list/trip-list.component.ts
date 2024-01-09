@@ -3,7 +3,10 @@ import { Trip } from '../../models/trip.model';
 import { FilterService } from '../../services/filter.service';
 import { CommonModule } from '@angular/common';
 import { TripFormComponent } from '../trip-form/trip-form.component';
-import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbPaginationModule,
+  NgbRatingModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { TripsService } from '../../services/trips.service';
 import { CurrencyPipe } from '../../pipes/currency.pipe';
 import { TripFilterComponent } from '../trip-filter/trip-filter.component';
@@ -25,16 +28,16 @@ import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reserva
     NgbRatingModule,
     TripFilterComponent,
     OnsiteReservationComponent,
+    NgbPaginationModule,
   ],
 })
 export class TripListComponent implements OnInit {
   trips: Trip[] = [];
   currency = 'USD';
-  filteredTrips$: Observable<Trip[]> = this.filterService.filteredTrips$;
-
-  deleteTrip = (tripId: string): void => {
-    this.tripService.deleteTrip(tripId);
-  };
+  filteredTrips: Trip[] = [];
+  pageSizes = [2, 5, 10];
+  pageSize = 10;
+  currentPage = 1;
 
   maxPrice = (): number => {
     const maxPrice = this.trips.reduce(
@@ -62,6 +65,25 @@ export class TripListComponent implements OnInit {
     this.router.navigate(['/trip', tripId]);
   }
 
+  setPage(page: number) {
+    this.currentPage = page;
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.filteredTrips.length / this.pageSize);
+  }
+
+  getCurrentPageItems(): Trip[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.filteredTrips.slice(startIndex, endIndex);
+  }
+
+  onChange = (event: any): void => {
+    this.pageSize = parseInt(event.target.value, 10);
+    console.log(this.pageSize);
+  };
+
   constructor(
     private router: Router,
     private filterService: FilterService,
@@ -76,6 +98,9 @@ export class TripListComponent implements OnInit {
     });
     this.currencyService.currency$.subscribe((currency) => {
       this.currency = currency;
+    });
+    this.filterService.filteredTrips$.subscribe((filteredTrips) => {
+      this.filteredTrips = filteredTrips;
     });
   }
 }

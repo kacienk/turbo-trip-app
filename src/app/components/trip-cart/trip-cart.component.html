@@ -1,8 +1,7 @@
-<div *ngIf="tripsInCart.length; else cartEmpty">
+<div *ngIf="tripsInCart.length; else cartEmpty" class="container mt-5">
   <div *ngFor="let trip of tripsInCart">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ trip.name | uppercase }}</h5>
+    <div class="card trip-item">
+      <div class="card-body trip-name-wrapper">
         <input
           class="form-check-input"
           type="checkbox"
@@ -10,6 +9,13 @@
           [checked]="isTripSelected(trip)"
           (change)="tripSelectionChange(trip)"
         />
+        <h5 class="card-title trip-name">{{ trip.name | uppercase }}</h5>
+        <div class="sum-trip-cost">
+          {{
+            trip.price * tripOnsiteReservations(trip.id)
+              | currencyPipe : currency
+          }}
+        </div>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
@@ -21,7 +27,7 @@
         </li>
         <li class="list-group-item">Max spots: {{ trip.maxSpots }}</li>
         <li class="list-group-item">
-          Price: ${{ trip.price | currencyPipe : currency }}
+          Price: {{ trip.price | currencyPipe : currency }}
         </li>
         <li class="list-group-item">
           <app-onsite-reservation
@@ -32,9 +38,13 @@
       </ul>
     </div>
   </div>
-  <button class="btn btn-primary" (click)="buy()" style="margin: 10px">
-    Buy
-  </button>
-  <p class="cart-cost">{{ selectedTripsValue() | currencyPipe : currency }}</p>
+  <div class="cart-summary">
+    <button class="btn btn-primary" (click)="buy()" style="margin: 10px">
+      Buy
+    </button>
+    <p class="cart-cost">
+      {{ selectedTripsValue() | currencyPipe : currency }}
+    </p>
+  </div>
 </div>
 <ng-template #cartEmpty><p>Cart is empty!</p></ng-template>

@@ -25,8 +25,8 @@ export class TripCartComponent implements OnInit {
     return this.selectedTrips.some((selected) => trip.id === selected.id);
   };
 
-  tripReservations = (tripId: string): number => {
-    return this.reservationsService.getTripReservationsCount(tripId);
+  tripOnsiteReservations = (tripId: string): number => {
+    return this.onsiteReservationService.getTripReservationsCount(tripId);
   };
 
   tripSelectionChange = (trip: Trip): void => {
