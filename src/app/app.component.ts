@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
 import { ReservationSumComponent } from './components/reservation-sum/reservation-sum.component';
-import { FirestoreModule, Firestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '../environments/environment';
 import { TripsService } from './services/trips.service';
 import _trips from '../assets/trips.json';
 import { ITrip } from './models/trip.model';
 import { CurrencySelectorComponent } from './components/currency-selector/currency-selector.component';
+import { Auth, User } from '@angular/fire/auth';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -29,9 +27,10 @@ import { CurrencySelectorComponent } from './components/currency-selector/curren
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'turbo-trip-app';
   isMenuCollapsed = true;
+  user: User | null = null;
 
   populate = () => {
     _trips.forEach((trip: ITrip) => {
@@ -41,12 +40,19 @@ export class AppComponent {
 
   constructor(
     private modalService: NgbModal,
-    private tripsService: TripsService
+    private tripsService: TripsService,
+    private userService: UserService
   ) {
     //this.populate();
   }
 
   public open(modal: any): void {
     this.modalService.open(modal);
+  }
+
+  ngOnInit(): void {
+    this.userService.user.subscribe((user) => {
+      this.user = user;
+    });
   }
 }

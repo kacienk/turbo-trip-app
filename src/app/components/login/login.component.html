@@ -1,0 +1,73 @@
+<div class="login-wrapper">
+  <form
+    [formGroup]="registrationForm"
+    (ngSubmit)="onSubmit()"
+    class="login-form"
+  >
+    <div class="error-box" *ngIf="showError">
+      Something went wrong. Please try again.
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      <div
+        *ngIf="
+          registrationForm.get('email')?.hasError('required') &&
+          registrationForm.get('email')?.touched
+        "
+        class="text-danger"
+      >
+        Email is required
+      </div>
+      <div
+        *ngIf="
+          registrationForm.get('email')?.hasError('email') &&
+          registrationForm.get('email')?.touched
+        "
+        class="text-danger"
+      >
+        Invalid email format
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <div class="input-group">
+        <input
+          type="{{ showPassword ? 'text' : 'password' }}"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          (blur)="togglePasswordVisibility(false)"
+        />
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="togglePasswordVisibility(!showPassword)"
+        >
+          <i
+            class="bi"
+            [class.bi-eye]="showPassword"
+            [class.bi-eye-slash]="!showPassword"
+          ></i>
+        </button>
+      </div>
+      <div
+        *ngIf="
+          registrationForm.get('password')?.hasError('required') &&
+          registrationForm.get('password')?.touched
+        "
+        class="text-danger"
+      >
+        Password is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">login</button>
+  </form>
+</div>

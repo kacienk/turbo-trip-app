@@ -1,0 +1,125 @@
+<div class="register-wrapper">
+  <form
+    [formGroup]="registrationForm"
+    (ngSubmit)="onSubmit()"
+    class="register-form"
+  >
+    <div class="error-box" *ngIf="showError">
+      Something went wrong. Please try again.
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      <div
+        *ngIf="
+          registrationForm.get('email')?.hasError('required') &&
+          registrationForm.get('email')?.touched
+        "
+        class="text-danger"
+      >
+        Email is required
+      </div>
+      <div
+        *ngIf="
+          registrationForm.get('email')?.hasError('email') &&
+          registrationForm.get('email')?.touched
+        "
+        class="text-danger"
+      >
+        Invalid email format
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <div class="input-group">
+        <input
+          type="{{ showPassword ? 'text' : 'password' }}"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          (blur)="togglePasswordVisibility(false)"
+        />
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="togglePasswordVisibility(!showPassword)"
+        >
+          <i
+            class="bi"
+            [class.bi-eye]="showPassword"
+            [class.bi-eye-slash]="!showPassword"
+          ></i>
+        </button>
+      </div>
+      <div
+        *ngIf="
+          registrationForm.get('password')?.hasError('required') &&
+          registrationForm.get('password')?.touched
+        "
+        class="text-danger"
+      >
+        Password is required
+      </div>
+      <div
+        *ngIf="
+          registrationForm.get('password')?.hasError('pattern') &&
+          registrationForm.get('password')?.touched
+        "
+        class="text-danger"
+      >
+        Password must be at least 8 characters long, have at least one uppercase
+        letter, one lowercase letter, one digit, and one special character.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <div class="input-group">
+        <input
+          type="{{ showConfirmPassword ? 'text' : 'password' }}"
+          class="form-control"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          (blur)="toggleConfirmPasswordVisibility(false)"
+        />
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="toggleConfirmPasswordVisibility(!showConfirmPassword)"
+        >
+          <i
+            class="bi"
+            [class.bi-eye]="showConfirmPassword"
+            [class.bi-eye-slash]="!showConfirmPassword"
+          ></i>
+        </button>
+      </div>
+      <div
+        *ngIf="
+          registrationForm.get('confirmPassword')?.hasError('required') &&
+          registrationForm.get('confirmPassword')?.touched
+        "
+        class="text-danger"
+      >
+        Confirm Password is required
+      </div>
+      <div
+        *ngIf="
+          registrationForm.hasError('mismatch') &&
+          registrationForm.get('confirmPassword')?.touched
+        "
+        class="text-danger"
+      >
+        Passwords must match
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
