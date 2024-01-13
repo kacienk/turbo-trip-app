@@ -33,7 +33,8 @@ export class ReservationsService {
   };
 
   addReservation(reservation: Reservation): Promise<void> {
-    const userTripsCollection = this.store.collection<Reservation>('userTrips');
+    const userTripsCollection =
+      this.store.collection<Reservation>('reservations');
     const documentId = `${reservation.userId}_${reservation.tripId}`;
     return userTripsCollection.doc(documentId).set(reservation);
   }

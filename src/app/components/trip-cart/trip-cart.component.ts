@@ -49,10 +49,13 @@ export class TripCartComponent implements OnInit {
       const reservation: Reservation = {
         userId: !this.user ? '' : this.user.email ? this.user.email : '',
         tripId: trip.id,
-        count: trip.reservedSpots,
+        count: this.onsiteReservationService.getTripReservationsCount(trip.id),
       };
       this.reservationsService.addReservation(reservation);
-      this.onsiteReservationService.removeReservation(trip.id);
+      this.onsiteReservationService.removeReservation(
+        trip.id,
+        this.onsiteReservationService.getTripReservationsCount(trip.id)
+      );
     });
     this.selectedTrips = [];
   };

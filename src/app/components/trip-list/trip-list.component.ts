@@ -57,10 +57,6 @@ export class TripListComponent implements OnInit {
     return minPrice;
   };
 
-  tripReservations = (tripId: string): number => {
-    return this.reservationsService.getTripReservationsCount(tripId);
-  };
-
   viewDetails(tripId: string): void {
     this.router.navigate(['/trip', tripId]);
   }

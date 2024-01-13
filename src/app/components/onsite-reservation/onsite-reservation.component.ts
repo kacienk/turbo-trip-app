@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { OnsiteReservationsService } from '../../services/onsite-reservations.service';
+import { ReservationsService } from '../../services/reservations.service';
 
 @Component({
   selector: 'app-onsite-reservation',
@@ -12,7 +13,6 @@ import { OnsiteReservationsService } from '../../services/onsite-reservations.se
 export class OnsiteReservationComponent implements OnInit {
   onsiteReservations: string[] = [];
   @Input() tripId: string = '';
-  @Input() takenSpots: number = 0;
   @Input() maxSpots: number = 0;
 
   getReservedSpotsCount = (): number => {
@@ -20,7 +20,11 @@ export class OnsiteReservationComponent implements OnInit {
   };
 
   freeSpots = (): number => {
-    return this.maxSpots - (this.takenSpots + this.getReservedSpotsCount());
+    return (
+      this.maxSpots -
+      (this.reservationsService.getTripReservationsCount(this.tripId) +
+        this.getReservedSpotsCount())
+    );
   };
 
   addReservation = (): void => {
@@ -31,7 +35,10 @@ export class OnsiteReservationComponent implements OnInit {
     this.onsiteReservationService.removeReservation(this.tripId);
   };
 
-  constructor(private onsiteReservationService: OnsiteReservationsService) {}
+  constructor(
+    private onsiteReservationService: OnsiteReservationsService,
+    private reservationsService: ReservationsService
+  ) {}
 
   ngOnInit(): void {
     this.onsiteReservationService.onsiteReservations$.subscribe(

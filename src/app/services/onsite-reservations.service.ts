@@ -22,13 +22,15 @@ export class OnsiteReservationsService {
     this.onsiteReservationsSubject.next([...currentOnSiteReservations, tripId]);
   };
 
-  removeReservation = (tripId: string): void => {
-    const currentOnSiteReservations = this.onsiteReservationsSubject.value;
-    const indexToRemove = currentOnSiteReservations.indexOf(tripId);
+  removeReservation = (tripId: string, count: number = 1): void => {
+    while (count--) {
+      const currentOnSiteReservations = this.onsiteReservationsSubject.value;
+      const indexToRemove = currentOnSiteReservations.indexOf(tripId);
 
-    if (indexToRemove != -1) {
-      currentOnSiteReservations.splice(indexToRemove, 1);
-      this.onsiteReservationsSubject.next(currentOnSiteReservations);
+      if (indexToRemove != -1) {
+        currentOnSiteReservations.splice(indexToRemove, 1);
+        this.onsiteReservationsSubject.next(currentOnSiteReservations);
+      }
     }
   };
 
