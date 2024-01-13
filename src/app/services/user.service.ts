@@ -15,34 +15,22 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   providedIn: 'root',
 })
 export class UserService {
-  user: Observable<any> = this.auth.authState;
+  user$: Observable<any> = this.auth.authState;
 
   constructor(private router: Router, private auth: AngularFireAuth) {}
 
-  public register(email: string, password: string): boolean {
-    let result: boolean = false;
-    this.auth
+  public async register(email: string, password: string): Promise<void> {
+    return this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
         this.router.navigate(['/login']);
-        result = true;
-      })
-      .catch();
-
-    return result;
+      });
   }
 
-  public login(email: string, password: string): boolean {
-    let result: boolean = false;
-    this.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.router.navigate(['/']);
-        result = true;
-      })
-      .catch();
-
-    return result;
+  public async login(email: string, password: string): Promise<void> {
+    return this.auth.signInWithEmailAndPassword(email, password).then(() => {
+      this.router.navigate(['/']);
+    });
   }
 
   public logout(): void {

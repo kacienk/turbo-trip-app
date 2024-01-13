@@ -10,7 +10,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const userService = inject(UserService);
   const router = inject(Router);
 
-  return userService.user.pipe(
+  return userService.user$.pipe(
     take(1),
     map((user) => {
       const userLoggedIn = !!user;
@@ -20,5 +20,4 @@ export const authGuard: CanActivateFn = (route, state) => {
       return userLoggedIn;
     })
   );
-  // console.log(userLoggedIn);
 };

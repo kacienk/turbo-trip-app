@@ -35,7 +35,9 @@ export class LoginComponent {
   onSubmit() {
     if (this.registrationForm.valid) {
       const { email, password } = this.registrationForm.value;
-      this.showError = !this.userService.login(email, password);
+      this.userService.login(email, password).catch(() => {
+        this.showError = true;
+      });
     } else {
       this.registrationForm.markAllAsTouched();
     }

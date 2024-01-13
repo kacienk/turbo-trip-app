@@ -8,6 +8,9 @@ import { Reservation } from '../../models/reservation.model';
 import { CurrencyService } from '../../services/currency.service';
 import { OnsiteReservationsService } from '../../services/onsite-reservations.service';
 import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reservation.component';
+import { UserService } from '../../services/user.service';
+import { User } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip-cart',
@@ -20,6 +23,7 @@ export class TripCartComponent implements OnInit {
   tripsInCart: Trip[] = [];
   selectedTrips: Trip[] = [];
   currency = 'USD';
+  user: User | null = null;
 
   isTripSelected = (trip: Trip): boolean => {
     return this.selectedTrips.some((selected) => trip.id === selected.id);
@@ -39,14 +43,16 @@ export class TripCartComponent implements OnInit {
   };
 
   buy = (): void => {
+    if (this.user === null) this.router.navigate(['/login']);
+
     this.selectedTrips.forEach((trip) => {
       const reservation: Reservation = {
-        userId: 'none',
+        userId: !this.user ? '' : this.user.email ? this.user.email : '',
         tripId: trip.id,
         count: trip.reservedSpots,
       };
       this.reservationsService.addReservation(reservation);
-      //this.cartService.removeReservation(trip, trip.reservedSpots);
+      this.onsiteReservationService.removeReservation(trip.id);
     });
     this.selectedTrips = [];
   };
@@ -65,7 +71,9 @@ export class TripCartComponent implements OnInit {
     private cartService: CartService,
     private reservationsService: ReservationsService,
     private currencyService: CurrencyService,
-    private onsiteReservationService: OnsiteReservationsService
+    private onsiteReservationService: OnsiteReservationsService,
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -82,6 +90,9 @@ export class TripCartComponent implements OnInit {
     );
     this.currencyService.currency$.subscribe((currency) => {
       this.currency = currency;
+    });
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
     });
   }
 }
