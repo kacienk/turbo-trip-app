@@ -7,18 +7,18 @@ import { map, take } from 'rxjs';
 import { flush } from '@angular/core/testing';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const auth = inject(AngularFireAuth);
+  const userService = inject(UserService);
   const router = inject(Router);
-  let userLoggedIn;
 
-  auth.authState.pipe(
+  return userService.user.pipe(
     take(1),
     map((user) => {
-      userLoggedIn = user ? true : false;
+      const userLoggedIn = !!user;
+
+      if (!userLoggedIn) return router.createUrlTree(['/', 'login']);
+
+      return userLoggedIn;
     })
   );
-
-  if (!userLoggedIn) return router.createUrlTree(['/', 'login']);
-
-  return userLoggedIn;
+  // console.log(userLoggedIn);
 };

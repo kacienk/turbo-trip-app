@@ -43,10 +43,10 @@
             >Cart</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user">
           <a
             class="nav-link"
-            routerLink="/add-trip"
+            routerLink="/trip/add"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             >Add trip</a
