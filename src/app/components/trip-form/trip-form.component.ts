@@ -9,6 +9,7 @@ import { ITrip, Trip } from '../../models/trip.model';
 import { TripsService } from '../../services/trips.service';
 import { CommonModule } from '@angular/common';
 import { CURRENCIES, CurrencyService } from '../../services/currency.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip-form',
@@ -24,7 +25,8 @@ export class TripFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private tripService: TripsService,
-    private currencyService: CurrencyService
+    private currencyService: CurrencyService,
+    private router: Router
   ) {
     this.tripForm = this.formBuilder.group({
       id: ['', Validators.pattern('[a-z0-9-]*')],
@@ -43,7 +45,6 @@ export class TripFormComponent implements OnInit {
     if (this.tripForm.valid) {
       const regex = /[^a-z0-9-]/g;
       const tripData: ITrip = this.tripForm.value as ITrip;
-      tripData.takenSpots = 0;
       tripData.price /= CURRENCIES[this.currency as keyof typeof CURRENCIES];
 
       if (!tripData.id) {
@@ -55,6 +56,8 @@ export class TripFormComponent implements OnInit {
 
       this.tripService.addTrip(tripData);
       this.tripForm.reset();
+
+      this.router.navigate(['/login']);
     }
   }
 

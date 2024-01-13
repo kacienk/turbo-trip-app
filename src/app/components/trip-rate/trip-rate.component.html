@@ -1,0 +1,11 @@
+<div class="rate-wrapper">
+  <ngb-rating
+    [rate]="getUserRate()"
+    [max]="5"
+    (rateChange)="onRatingChange($event)"
+  ></ngb-rating>
+  <div>
+    (Avarage rate {{ getAverageRate().toFixed(2) }} of
+    {{ tripRates.length }} rates)
+  </div>
+</div>

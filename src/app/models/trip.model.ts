@@ -8,7 +8,6 @@ export interface ITrip {
   endDate: Date | string;
   price: number;
   maxSpots: number;
-  takenSpots: number;
   description: string;
   imageRef: string;
 }
@@ -22,11 +21,9 @@ export class Trip implements ITrip {
     this.endDate = new Date(data.endDate);
     this.price = data.price;
     this.maxSpots = data.maxSpots;
-    this.takenSpots = data.takenSpots;
     this.description = data.description;
     this.imageRef = data.imageRef;
     this.rating = 0;
-    this.reservedSpots = 0;
   }
 
   id: string;
@@ -36,9 +33,7 @@ export class Trip implements ITrip {
   endDate: Date;
   price: number;
   maxSpots: number;
-  takenSpots: number;
   description: string;
   imageRef: string;
   rating: number;
-  reservedSpots: number;
 }

@@ -7,11 +7,19 @@ import { ReservationsService } from '../../services/reservations.service';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { CurrencyPipe } from '../../pipes/currency.pipe';
 import { CurrencyService } from '../../services/currency.service';
+import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reservation.component';
+import { TripRateComponent } from '../trip-rate/trip-rate.component';
 
 @Component({
   selector: 'app-trip-detail',
   standalone: true,
-  imports: [CommonModule, NgbRatingModule, CurrencyPipe, DatePipe],
+  imports: [
+    CommonModule,
+    CurrencyPipe,
+    DatePipe,
+    OnsiteReservationComponent,
+    TripRateComponent,
+  ],
   templateUrl: './trip-detail.component.html',
   styleUrl: './trip-detail.component.css',
 })
@@ -19,28 +27,13 @@ export class TripDetailComponent implements OnInit {
   trip: Trip | undefined;
   currency = 'USD';
 
-  addReservation = (): void => {
-    if (this.trip) this.tripService.addReservation(this.trip);
-  };
-
-  removeReservation = (): void => {
-    if (this.trip) this.tripService.removeReservation(this.trip);
-  };
-
   deleteTrip = (): void => {
     if (this.trip) this.tripService.deleteTrip(this.trip.id);
-  };
-
-  tripReservations = (): number => {
-    return this.trip
-      ? this.reservationsService.getTripReservationsCount(this.trip.id)
-      : 0;
   };
 
   constructor(
     private route: ActivatedRoute,
     private tripService: TripsService,
-    private reservationsService: ReservationsService,
     private currencyService: CurrencyService
   ) {}
 

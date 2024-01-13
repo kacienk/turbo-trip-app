@@ -6,14 +6,18 @@
   margin-bottom: 10px;
 }
 
-.reservation-button {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
+.manage-button {
+  color: gray;
+  border-color: gray;
+  min-width: 170px;
+}
 
-  align-self: center;
-  justify-self: flex-end;
-  cursor: pointer;
+.manage-button:hover {
+  color: white;
+  background-color: gray;
+}
+
+.manage-buttons {
+  min-width: 300px;
+  margin-bottom: 10px;
 }

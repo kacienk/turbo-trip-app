@@ -144,25 +144,6 @@
     </div>
 
     <div class="form-group">
-      <label for="takenSpots">Taken Spots:</label>
-      <input
-        type="number"
-        id="takenSpots"
-        formControlName="takenSpots"
-        class="form-control"
-      />
-      <div
-        *ngIf="
-          tripForm.get('takenSpots')?.hasError('min') &&
-          tripForm.get('takenSpots')?.touched
-        "
-        class="error-message"
-      >
-        Taken Spots must be greater than or equal to 0.
-      </div>
-    </div>
-
-    <div class="form-group">
       <label for="description">Description:</label>
       <textarea
         id="description"

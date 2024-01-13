@@ -66,27 +66,4 @@ export class TripsService {
     const tripDocument = tripsCollection.doc(tripId);
     return tripDocument.delete();
   }
-
-  addReservation = (trip: Trip): void => {
-    const updatedTrips = this.tripsSubject.value.map((_trip) => {
-      if (trip === _trip) {
-        _trip.reservedSpots++;
-      }
-      return _trip;
-    });
-
-    this.tripsSubject.next(updatedTrips);
-  };
-
-  removeReservation = (trip: Trip, count?: number): void => {
-    const updatedTrips = this.tripsSubject.value.map((_trip) => {
-      if (trip === _trip) {
-        if (count === undefined) _trip.reservedSpots--;
-        else _trip.reservedSpots -= count;
-      }
-      return _trip;
-    });
-
-    this.tripsSubject.next(updatedTrips);
-  };
 }

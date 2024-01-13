@@ -77,7 +77,6 @@ export class TripListComponent implements OnInit {
 
   onChange = (event: any): void => {
     this.pageSize = parseInt(event.target.value, 10);
-    console.log(this.pageSize);
   };
 
   constructor(
