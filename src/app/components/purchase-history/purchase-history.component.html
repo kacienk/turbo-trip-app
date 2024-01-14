@@ -1,6 +1,6 @@
-<app-purchase-history-filters></app-purchase-history-filters>
+<app-history-filter></app-history-filter>
 <div *ngIf="userReservations.length; else listEmpty" class="container mt-5">
-  <div *ngFor="let reservation of userReservations">
+  <div *ngFor="let reservation of getFilteredReservations()">
     <div class="card trip-item">
       <div
         class="card-body trip-name-wrapper"

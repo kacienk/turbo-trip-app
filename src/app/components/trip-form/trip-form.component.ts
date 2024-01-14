@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 export class TripFormComponent implements OnInit {
   tripForm: FormGroup;
   currency = 'USD';
+  @Input() trip: Trip | undefined = undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,17 +29,33 @@ export class TripFormComponent implements OnInit {
     private currencyService: CurrencyService,
     private router: Router
   ) {
-    this.tripForm = this.formBuilder.group({
-      id: ['', Validators.pattern('[a-z0-9-]*')],
-      name: ['', Validators.required],
-      destinationCountry: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(0)]],
-      maxSpots: ['', [Validators.required, Validators.min(1)]],
-      description: ['', Validators.required],
-      imageRef: ['', Validators.required],
-    });
+    if (!this.trip) {
+      this.tripForm = this.formBuilder.group({
+        id: ['', Validators.pattern('[a-z0-9-]*')],
+        name: ['', Validators.required],
+        destinationCountry: ['', Validators.required],
+        startDate: ['', Validators.required],
+        endDate: ['', Validators.required],
+        price: ['', [Validators.required, Validators.min(0)]],
+        maxSpots: ['', [Validators.required, Validators.min(1)]],
+        description: ['', Validators.required],
+        imageRef: ['', Validators.required],
+      });
+    } else {
+      this.tripForm = this.formBuilder.group({
+        name: [this.trip.name, Validators.required],
+        destinationCountry: [this.trip.destinationCountry, Validators.required],
+        startDate: [this.trip.startDate, Validators.required],
+        endDate: [this.trip.endDate, Validators.required],
+        price: [this.trip.price, [Validators.required, Validators.min(0)]],
+        maxSpots: [
+          this.trip.maxSpots,
+          [Validators.required, Validators.min(1)],
+        ],
+        description: [this.trip.description, Validators.required],
+        imageRef: [this.trip.imageRef, Validators.required],
+      });
+    }
   }
 
   addTrip() {

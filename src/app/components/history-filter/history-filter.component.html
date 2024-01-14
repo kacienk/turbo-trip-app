@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <form class="form-inline">
+    <div
+      class="btn-group"
+      role="group"
+      aria-label="Basic checkbox toggle button group"
+    >
+      <input
+        type="checkbox"
+        class="btn-check"
+        id="past"
+        autocomplete="off"
+        [(ngModel)]="historyFilters.past"
+        name="past"
+      />
+      <label class="btn btn-outline-primary" for="past">Past</label>
+
+      <input
+        type="checkbox"
+        class="btn-check"
+        id="active"
+        autocomplete="off"
+        [(ngModel)]="historyFilters.active"
+        name="active"
+      />
+      <label class="btn btn-outline-primary" for="active">Active</label>
+
+      <input
+        type="checkbox"
+        class="btn-check"
+        id="future"
+        autocomplete="off"
+        [(ngModel)]="historyFilters.future"
+        name="future"
+      />
+      <label class="btn btn-outline-primary" for="future">Future</label>
+    </div>
+    <button type="button" class="btn btn-secondary" (click)="clearFilters()">
+      Clear Filters
+    </button>
+  </form>
+</div>
