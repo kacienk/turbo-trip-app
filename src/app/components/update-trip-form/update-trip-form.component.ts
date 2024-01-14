@@ -48,9 +48,12 @@ export class UpdateTripFormComponent {
 
   updateTrip() {
     if (this.tripForm.valid) {
-      const tripData: ITrip = this.tripForm.value as ITrip;
+      const tripData: ITrip = {
+        ...this.tripForm.value,
+        id: this.tripId,
+      } as ITrip;
       tripData.price /= CURRENCIES[this.currency as keyof typeof CURRENCIES];
-
+      console.log(tripData);
       this.tripService.updateTrip(tripData);
       this.tripForm.reset();
 

@@ -5,11 +5,12 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../services/user.service';
 import { User } from '@angular/fire/auth';
 import { min } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-trip-rate',
   standalone: true,
-  imports: [NgbRatingModule],
+  imports: [NgbRatingModule, CommonModule],
   templateUrl: './trip-rate.component.html',
   styleUrl: './trip-rate.component.css',
 })

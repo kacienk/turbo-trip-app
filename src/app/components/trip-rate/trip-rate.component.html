@@ -3,7 +3,9 @@
     [rate]="getUserRate()"
     [max]="5"
     (rateChange)="onRatingChange($event)"
+    *ngIf="user"
   ></ngb-rating>
+  <ngb-rating [rate]="getAverageRate()" [max]="5" *ngIf="!user"></ngb-rating>
   <div>
     (Avarage rate {{ getAverageRate().toFixed(2) }} of
     {{ tripRates.length }} rates)

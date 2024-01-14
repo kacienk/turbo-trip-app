@@ -24,7 +24,7 @@
           {{ trip.name | uppercase }}
         </h3>
       </div>
-      <div class="manage-buttons">
+      <div class="manage-buttons" *ngIf="user">
         <button
           type="button"
           class="btn btn-outline-danger manage-button"

@@ -8,6 +8,8 @@ import { CurrencyService } from '../../services/currency.service';
 import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reservation.component';
 import { TripRateComponent } from '../trip-rate/trip-rate.component';
 import { GoBackComponent } from '../go-back/go-back.component';
+import { UserService } from '../../services/user.service';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-trip-detail',
@@ -24,6 +26,7 @@ import { GoBackComponent } from '../go-back/go-back.component';
   styleUrl: './trip-detail.component.css',
 })
 export class TripDetailComponent implements OnInit {
+  user: User | null = null;
   tripId: string = '';
   trip: Trip | undefined;
   currency = 'USD';
@@ -40,7 +43,8 @@ export class TripDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private tripService: TripsService,
     private currencyService: CurrencyService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,9 @@ export class TripDetailComponent implements OnInit {
       });
       this.currencyService.currency$.subscribe((currency) => {
         this.currency = currency;
+      });
+      this.userService.user$.subscribe((user) => {
+        this.user = user;
       });
     });
   }
