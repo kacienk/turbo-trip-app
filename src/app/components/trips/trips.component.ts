@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Trip } from '../../models/trip.model';
 import { CurrencyPipe } from '../../pipes/currency.pipe';
 import { TripsService } from '../../services/trips.service';
-import { TripFormComponent } from '../trip-form/trip-form.component';
+import { AddTripFormComponent } from '../add-trip-form/add-trip-form.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { TripListComponent } from '../trip-list/trip-list.component';
 import { TripFilterComponent } from '../trip-filter/trip-filter.component';
@@ -16,7 +16,6 @@ import { TripFilterComponent } from '../trip-filter/trip-filter.component';
   imports: [
     CommonModule,
     CurrencyPipe,
-    TripFormComponent,
     NgbRatingModule,
     TripListComponent,
     TripFilterComponent,

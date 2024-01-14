@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Trip } from '../../models/trip.model';
 import { FilterService } from '../../services/filter.service';
 import { CommonModule } from '@angular/common';
-import { TripFormComponent } from '../trip-form/trip-form.component';
+import { AddTripFormComponent } from '../add-trip-form/add-trip-form.component';
 import {
   NgbPaginationModule,
   NgbRatingModule,
@@ -24,7 +24,6 @@ import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reserva
   imports: [
     CommonModule,
     CurrencyPipe,
-    TripFormComponent,
     NgbRatingModule,
     TripFilterComponent,
     OnsiteReservationComponent,
