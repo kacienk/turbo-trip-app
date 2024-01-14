@@ -4,7 +4,7 @@ import { Trip } from '../../models/trip.model';
 import { CommonModule } from '@angular/common';
 import { CurrencyPipe } from '../../pipes/currency.pipe';
 import { ReservationsService } from '../../services/reservations.service';
-import { Reservation } from '../../models/reservation.model';
+import { IReservation, Reservation } from '../../models/reservation.model';
 import { CurrencyService } from '../../services/currency.service';
 import { OnsiteReservationsService } from '../../services/onsite-reservations.service';
 import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reservation.component';
@@ -46,10 +46,11 @@ export class TripCartComponent implements OnInit {
     if (this.user === null) this.router.navigate(['/login']);
 
     this.selectedTrips.forEach((trip) => {
-      const reservation: Reservation = {
+      const reservation: IReservation = {
         userId: !this.user ? '' : this.user.email ? this.user.email : '',
         tripId: trip.id,
         count: this.onsiteReservationService.getTripReservationsCount(trip.id),
+        purchaseDate: new Date(Date.now()),
       };
       this.reservationsService.addReservation(reservation);
       this.onsiteReservationService.removeReservation(
@@ -69,6 +70,10 @@ export class TripCartComponent implements OnInit {
       );
     }, 0);
   };
+
+  viewDetails(tripId: string): void {
+    this.router.navigate(['/trip', tripId]);
+  }
 
   constructor(
     private cartService: CartService,

@@ -9,6 +9,7 @@ import { CurrencyPipe } from '../../pipes/currency.pipe';
 import { CurrencyService } from '../../services/currency.service';
 import { OnsiteReservationComponent } from '../onsite-reservation/onsite-reservation.component';
 import { TripRateComponent } from '../trip-rate/trip-rate.component';
+import { GoBackComponent } from '../go-back/go-back.component';
 
 @Component({
   selector: 'app-trip-detail',
@@ -19,6 +20,7 @@ import { TripRateComponent } from '../trip-rate/trip-rate.component';
     DatePipe,
     OnsiteReservationComponent,
     TripRateComponent,
+    GoBackComponent,
   ],
   templateUrl: './trip-detail.component.html',
   styleUrl: './trip-detail.component.css',

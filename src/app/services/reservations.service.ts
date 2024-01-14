@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Reservation } from '../models/reservation.model';
+import { IReservation, Reservation } from '../models/reservation.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +12,12 @@ export class ReservationsService {
 
   constructor(private store: AngularFirestore) {
     this.store
-      .collection<Reservation>('reservations')
+      .collection<IReservation>('reservations')
       .valueChanges()
       .subscribe((reservations) => {
-        this.reservationsSubject.next(reservations);
+        this.reservationsSubject.next(
+          reservations.map((reservation) => new Reservation(reservation))
+        );
       });
   }
 
@@ -32,15 +34,20 @@ export class ReservationsService {
     );
   };
 
-  addReservation(reservation: Reservation): Promise<void> {
+  addReservation(reservation: IReservation): Promise<void> {
     const userTripsCollection =
-      this.store.collection<Reservation>('reservations');
-    const documentId = `${reservation.userId}_${reservation.tripId}`;
-    return userTripsCollection.doc(documentId).set(reservation);
+      this.store.collection<IReservation>('reservations');
+    const documentId = `${reservation.userId}_${reservation.tripId}_${reservation.purchaseDate}`;
+    return userTripsCollection
+      .doc(documentId)
+      .set({
+        ...reservation,
+        purchaseDate: reservation.purchaseDate.toString(),
+      });
   }
 
-  getUserReservations(userId: string): Observable<Reservation[]> {
-    const userTripsCollection = this.store.collection<Reservation>(
+  getUserReservations(userId: string): Observable<IReservation[]> {
+    const userTripsCollection = this.store.collection<IReservation>(
       'reservations',
       (ref) => ref.where('userId', '==', userId)
     );

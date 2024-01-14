@@ -1,11 +1,20 @@
-export class Reservation {
+export interface IReservation {
   userId: string;
   tripId: string;
   count: number;
+  purchaseDate: Date | string;
+}
 
-  constructor(userId: string, tripId: string, count: number) {
-    this.userId = userId;
-    this.tripId = tripId;
-    this.count = count;
+export class Reservation implements IReservation {
+  userId: string;
+  tripId: string;
+  count: number;
+  purchaseDate: Date;
+
+  constructor(reservation: IReservation) {
+    this.userId = reservation.userId;
+    this.tripId = reservation.tripId;
+    this.count = reservation.count;
+    this.purchaseDate = new Date(reservation.purchaseDate);
   }
 }

@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <form class="form-inline">
+    <div class="form-group mr-2">
+      <label class="mr-2">Filter:</label>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input
+          type="radio"
+          id="radio1"
+          name="filterOption"
+          class="custom-control-input"
+        />
+        <label class="custom-control-label" for="radio1">Future</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input
+          type="radio"
+          id="radio2"
+          name="filterOption"
+          class="custom-control-input"
+        />
+        <label class="custom-control-label" for="radio2">Active</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input
+          type="radio"
+          id="radio3"
+          name="filterOption"
+          class="custom-control-input"
+        />
+        <label class="custom-control-label" for="radio3">Past</label>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary mr-2"
+      (onclick)="applyFilters()"
+    >
+      Apply Filters
+    </button>
+    <button type="button" class="btn btn-secondary" (onclick)="clearFilters()">
+      Clear Filters
+    </button>
+  </form>
+</div>

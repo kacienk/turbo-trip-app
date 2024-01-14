@@ -1,0 +1,11 @@
+.trip-item {
+  margin-bottom: 10px;
+}
+
+.trip-name {
+  cursor: pointer;
+}
+
+.trip-name:hover {
+  color: rgb(173, 173, 173);
+}

@@ -9,7 +9,9 @@
           [checked]="isTripSelected(trip)"
           (change)="tripSelectionChange(trip)"
         />
-        <h5 class="card-title trip-name">{{ trip.name | uppercase }}</h5>
+        <h5 class="card-title trip-name" (click)="viewDetails(trip.id)">
+          {{ trip.name | uppercase }}
+        </h5>
         <div class="sum-trip-cost">
           {{
             trip.price * tripOnsiteReservations(trip.id)

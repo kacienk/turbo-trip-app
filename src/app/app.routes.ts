@@ -8,12 +8,18 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { authGuard } from './guards/auth.guard';
+import { PurchaseHistoryComponent } from './components/purchase-history/purchase-history.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'trip', component: TripsComponent },
   { path: 'cart', component: TripCartComponent },
   { path: 'trip/add', component: TripFormComponent, canActivate: [authGuard] },
+  {
+    path: 'trip/bought',
+    component: PurchaseHistoryComponent,
+    canActivate: [authGuard],
+  },
   { path: 'trip/:id', component: TripDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
